@@ -1,17 +1,33 @@
 {
   "name": "budget",
+  "proxy": {
+    "/.netlify/functions": {
+      "target": "http://localhost:9000",
+      "pathRewrite": {
+        "^/\\.netlify/functions": ""
+      }
+    }
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "chalk": "^2.4.2",
+    "dotenv": "^8.0.0",
+    "faunadb": "^2.6.1",
+    "gitignore": "^0.6.0",
+    "http-proxy-middleware": "^0.19.1",
+    "netlify-lambda": "^1.4.13",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1"
   },
   "scripts": {
+    "bootstrap": "node ./scripts/bootstrap-fauna-database.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lambda": "netlify-lambda serve src/lambda"
   },
   "eslintConfig": {
     "extends": "react-app"

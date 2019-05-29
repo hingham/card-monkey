@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  state = { message: "" };
+
+  runFunction = () => {
+    fetch("/.netlify/functions/hello")
+      .then(res => res.json())
+      .then(({ message }) => this.setState({ message: message }))
+      .catch(err => console.error(err));
+    console.log(this.state);
+  };
+
+  testCreate = () => {
+    fetch("/.netlify/functions/post", {
+      body: JSON.stringify({title: 'clean', time: 'now', task: "sweep"}),
+      method: "POST"
+    }).then(response => {
+      console.log(response);
+      return response.json();
+    })
+    .then(message=> console.log(message))
+  };
+
+  render() {
+    return (
+      <div>
+        <header>hello</header>
+        <button onClick={() => this.runFunction()}>clickme</button>
+        <button onClick={() => this.testCreate()}>create</button>
+        <div>{this.state.message}</div>
+      </div>
+    );
+  }
 }
-
-export default App;
