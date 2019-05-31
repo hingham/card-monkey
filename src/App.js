@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import { Provider } from "react-redux";
+
+import CardMonkey from "./CardMonkey.js";
+
 
 import { ApolloProvider } from "react-apollo";
 import { ApolloClient } from "apollo-client";
@@ -7,8 +11,8 @@ import { HttpLink } from "apollo-link-http";
 import { onError } from "apollo-link-error";
 import { ApolloLink } from "apollo-link";
 
-
-import MyQuery from './components/query/query.js';
+import createStore from "./store/index.js";
+const store = createStore();
 
 const client = new ApolloClient({
   link: ApolloLink.from([
@@ -22,7 +26,7 @@ const client = new ApolloClient({
       if (networkError) console.log(`[Network error]: ${networkError}`);
     }),
     new HttpLink({
-      uri: '/.netlify/functions/graphql',
+      uri: "/.netlify/functions/graphql",
       credentials: "same-origin"
     })
   ]),
@@ -30,19 +34,19 @@ const client = new ApolloClient({
 });
 
 export default class App extends Component {
-  state = { message: "" };
+  state = { 
+    message: "",
+    deckSelected: false,
 
-  runFunction = () => {
-    fetch("/.netlify/functions/hello")
-      .then(res => res.json())
-      .then(({ message }) => this.setState({ message: message }))
-      .catch(err => console.error(err));
-    console.log(this.state);
   };
 
   testPost = () => {
     fetch("/.netlify/functions/post", {
-      body: JSON.stringify({ title: "han", description: "hanbanan", model: "notes" }),
+      body: JSON.stringify({
+        title: "han",
+        description: "hanbanan",
+        model: "notes"
+      }),
       method: "POST"
     })
       .then(response => {
@@ -53,32 +57,17 @@ export default class App extends Component {
       .catch(error => console.error(error));
   };
 
-  testCreate = () => {
-    fetch("/.netlify/functions/create", {
-      body: JSON.stringify({ title: "clean", time: "now", task: "sweep" }),
-      method: "POST"
-    })
-      .then(response => {
-        console.log(response);
-        return response.text();
-      })
-      .then(message => console.log(message));
-  };
-
   render() {
     return (
-      <ApolloProvider client={client}>
-
-        <div>
-          <header>hello</header>
-          <button onClick={() => this.runFunction()}>clickme</button>
-          <button onClick={() => this.testPost()}>post</button>
-          <button onClick={() => this.testCreate()}>create</button>
-          <div>{this.state.message}</div>
-          <MyQuery/>
-        </div>
-
-      </ApolloProvider>
+      <Provider store={store}>
+        <ApolloProvider client={client}>
+          <div>
+            {/* <button onClick={() => this.testPost()}>post</button> */}
+            <div>{this.state.message}</div>
+            <CardMonkey/>
+          </div>
+        </ApolloProvider>
+      </Provider>
     );
   }
 }

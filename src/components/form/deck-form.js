@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 
-export default class form extends Component {
+class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      deck: null
+      deck: null,
+      model: "deck"
     };
   }
 
@@ -19,12 +20,12 @@ export default class form extends Component {
   };
 
   handleClearForm = () => {
-    this.setState({ location: "", description: "" });
+    this.setState({ deck: "" });
     console.log(this.state);
   };
 
   handleDeck = e => {
-    this.setState({ description: e.target.value });
+    this.setState({ deck: e.target.value });
     e.preventDefault();
   };
 
@@ -48,3 +49,6 @@ export default class form extends Component {
     );
   }
 }
+
+
+export default Form;

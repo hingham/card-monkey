@@ -1,39 +1,47 @@
-import React, { Component } from "react"
+import React, { Component } from "react";
+import {connect} from 'react-redux';
+import cards from "../../lambda/models/cards";
+import * as actions from "../../store/actions.js";
 
-export default class form extends Component {
+//Takes in prop from stores deck
+
+class CardForm extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       concept: null,
       definition: null,
-    }
+      deck_id: this.props.data.deck_id,
+      deck: this.props.data.deck,
+      model: "cards",
+    };
   }
 
   handleFormSubmit = () => {
+    console.log('state from card', this.state);
     fetch("/.netlify/functions/post", {
       body: JSON.stringify(this.state),
       method: "POST"
     })
-      .then(response =>  response.json())
+      .then(response => response.json())
       .then(message => console.log(message))
       .catch(error => console.error(error));
   };
 
   handleClearForm = () => {
-    this.setState({ location: "", description: "" })
-    console.log(this.state)
-  }
+    this.setState({ concept: "", definition: "" });
+    console.log(this.state);
+  };
 
   handleConcept = e => {
-    this.setState({ description: e.target.value })
-    e.preventDefault()
-  }
+    this.setState({ concept: e.target.value });
+    e.preventDefault();
+  };
 
   handleDefinition = e => {
-    this.setState({ location: e.target.value })
-    e.preventDefault()
-    // console.log('state', this.state);
-  }
+    this.setState({ definition: e.target.value });
+    e.preventDefault();
+  };
 
   render() {
     return (
@@ -43,7 +51,7 @@ export default class form extends Component {
           <label>
             Concept:
             <input
-                name="concept"
+              name="concept"
               type="text"
               value={this.state.concept}
               onChange={this.handleConcept}
@@ -52,8 +60,8 @@ export default class form extends Component {
           <label>
             Definition:
             <textarea
-            name="definition"
-            type="text-area"
+              name="definition"
+              type="text-area"
               value={this.state.definition}
               onChange={this.handleDefinition}
             />
@@ -62,6 +70,21 @@ export default class form extends Component {
           <input type="submit" value="Submit" />
         </fieldset>
       </form>
-    )
+    );
   }
 }
+
+const mapStateToProps = state => ({
+  data: state.data
+});
+
+
+const mapDispatchToProps = (dispatch, getState) => ({
+  changeDeck: payload => dispatch(actions.changeDeck(payload))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CardForm);
+

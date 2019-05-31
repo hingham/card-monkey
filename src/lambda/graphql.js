@@ -3,6 +3,9 @@ import { ApolloServer, gql } from "apollo-server-lambda";
 
 import connectToDatabase from "./db";
 import players from "./models/players.js";
+import decks from "./models/decks.js";
+import cards from "./models/cards.js";
+
 
 connectToDatabase();
 
@@ -15,6 +18,8 @@ const typeDefs = gql`
   type Query {
     articles: [Article]
     players: [Player]
+    decks: [Deck]
+    cards(deck_id: String!): [Card]
   }
   type Article {
     title: String
@@ -25,6 +30,19 @@ const typeDefs = gql`
   type Player {
     name: String!
   }
+
+  type Deck {
+    deck: String!
+    _id: String!
+    cards: [Card]
+  }
+
+  type Card {
+      deck_id: String!
+      _id: String!
+      concept: String
+      definition: String
+  }
 `;
 
 const resolvers = {
@@ -32,7 +50,19 @@ const resolvers = {
     articles: () => articles,
     players: () => {
       return players.find({});
+    },
+    decks: () => {
+      return decks.find({});
+    },
+    cards: (parent, args) =>{
+        return cards.find({deck_id: args.deck_id})
     }
+  },
+  Deck: {
+      cards: (parent, args) =>{
+        console.log('parent', parent);
+        return cards.find({deck_id: parent._id})
+      }
   }
 };
 

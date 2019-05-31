@@ -10,7 +10,7 @@ function getModel(m) {
   if (m === "notes") {
     // model = notes;
     return notes;
-  } else if (m === "decks") {
+  } else if (m === "deck") {
     // model = decks;
     return decks;
   } else if (m === "cards") {

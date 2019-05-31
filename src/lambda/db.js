@@ -1,6 +1,9 @@
 import mongoose from 'mongoose';
+import {} from 'dotenv/config'
 mongoose.Promise = global.Promise;
 let isConnected;
+
+console.log('password', process.env.MONGO_PASSWORD);
 
 const options = {
     useNewUrlParser:true,
@@ -14,7 +17,7 @@ export default function () {
   }
 
   console.log('=> using new database connection');
-  return mongoose.connect(`mongodb+srv://hingham:mongopples@cluster0-zuiec.mongodb.net/test?retryWrites=true&w=majority`, options)
+  return mongoose.connect(`mongodb+srv://hingham:${process.env.MONGO_PASSWORD}@cluster0-zuiec.mongodb.net/test?retryWrites=true&w=majority`, options)
     .then(db => { 
       isConnected = db.connections[0].readyState;
     })
