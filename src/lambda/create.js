@@ -1,9 +1,9 @@
-import faunadb from 'faunadb' /* Import faunaDB sdk */
+const faunadb =require('faunadb'); /* Import faunaDB sdk */
 
 /* configure faunaDB Client with our secret */
 const q = faunadb.query
 const client = new faunadb.Client({
-  secret: process.env.FAUNADB_SECRET
+  secret: `fnADPl5909ACAI8BM-sXNBL9tjwypKf1arJqP0aV`
 })
 
 /* export our lambda function as named "handler" export */

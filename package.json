@@ -1,25 +1,30 @@
 {
   "name": "budget",
-  "proxy": {
-    "/.netlify/functions": {
-      "target": "http://localhost:9000",
-      "pathRewrite": {
-        "^/\\.netlify/functions": ""
-      }
-    }
-  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "apollo-cache-inmemory": "^1.6.0",
+    "apollo-client": "^2.6.0",
+    "apollo-link": "^1.2.11",
+    "apollo-link-error": "^1.1.10",
+    "apollo-link-http": "^1.5.14",
+    "apollo-server-lambda": "^2.5.1",
     "chalk": "^2.4.2",
+    "co": "^4.6.0",
     "dotenv": "^8.0.0",
     "faunadb": "^2.6.1",
     "gitignore": "^0.6.0",
+    "graphql": "^14.3.1",
+    "graphql-tag": "^2.10.1",
     "http-proxy-middleware": "^0.19.1",
+    "mongoose": "^5.5.11",
+    "mongoose-schema-jsonschema": "^1.2.1",
     "netlify-lambda": "^1.4.13",
     "react": "^16.8.6",
+    "react-apollo": "^2.5.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "utf-8-validate": "^5.0.2"
   },
   "scripts": {
     "bootstrap": "node ./scripts/bootstrap-fauna-database.js",
@@ -30,7 +35,28 @@
     "lambda": "netlify-lambda serve src/lambda"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "rules": {
+      "semi": "error"
+    },
+    "overrides": [
+      {
+        "files": [
+          "*-test.js",
+          "*.spec.js"
+        ],
+        "rules": {
+          "no-unused-expressions": "off"
+        }
+      }
+    ]
   },
   "browserslist": {
     "production": [
