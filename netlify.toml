@@ -2,3 +2,8 @@
   command = "npm run build"
   functions = "built-lambda"
   publish = "build"
+
+[template.environment]
+  GITHUB_CLIENT_ID = "90d7f294e019428050e6"
+  GITHUB_CLIENT_SECRET = "30842a4b80d0eca3817e061fed59ca5f37529210" 
+  GITHUB_APP_ID = "1075066"

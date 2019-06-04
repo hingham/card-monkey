@@ -3,6 +3,7 @@ import connectToDatabase from "./db";
 import notes from "./models/note.js";
 import cards from "./models/cards.js";
 import decks from "./models/decks.js";
+import users from "./models/users.js";
 
 // let model;
 
@@ -10,6 +11,8 @@ function getModel(m) {
   if (m === "notes") {
     // model = notes;
     return notes;
+  } else if (m === "users") {
+    return users;
   } else if (m === "deck") {
     // model = decks;
     return decks;
@@ -27,7 +30,6 @@ export function handler(event, context, callback) {
   connectToDatabase()
     .then(() => {
       let model = getModel(JSON.parse(event.body).model);
-
       const newRecord = model(JSON.parse(event.body));
       const doc = newRecord.save();
       const response = {

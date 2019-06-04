@@ -3,7 +3,6 @@ import { Provider } from "react-redux";
 
 import CardMonkey from "./CardMonkey.js";
 
-
 import { ApolloProvider } from "react-apollo";
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
@@ -12,6 +11,7 @@ import { onError } from "apollo-link-error";
 import { ApolloLink } from "apollo-link";
 
 import createStore from "./store/index.js";
+import oauth from "./lambda/utils/oauth.js";
 const store = createStore();
 
 const client = new ApolloClient({
@@ -37,7 +37,6 @@ export default class App extends Component {
   state = { 
     message: "",
     deckSelected: false,
-
   };
 
   testPost = () => {
@@ -57,6 +56,13 @@ export default class App extends Component {
       .catch(error => console.error(error));
   };
 
+ 
+  getValues = () =>{
+    fetch("/.netlify/functions/auth-callback")
+    .then(res => console.log('did fetch', res))
+    .catch(err => console.error(err));
+  }
+
   render() {
     return (
       <Provider store={store}>
@@ -66,6 +72,11 @@ export default class App extends Component {
             <div>{this.state.message}</div>
             <CardMonkey/>
           </div>
+          <p>Login with github</p>
+          <div onClick={()=>this.goAuth()}>
+            github
+          </div>
+          <a href="/.netlify/functions/auth">github link</a>
         </ApolloProvider>
       </Provider>
     );
