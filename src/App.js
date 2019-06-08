@@ -56,6 +56,10 @@ export default class App extends Component {
       .catch(error => console.error(error));
   };
 
+  getCookies = () => {
+    console.log( 'cookies', document.cookie );
+  }
+
  
   getValues = () =>{
     fetch("/.netlify/functions/auth-callback")
@@ -78,6 +82,8 @@ export default class App extends Component {
           </div>
           <a href="/.netlify/functions/auth">github link</a>
         </ApolloProvider>
+
+        <button onClick={()=>this.getCookies()}>get cookies</button>
       </Provider>
     );
   }

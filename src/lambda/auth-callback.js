@@ -1,6 +1,8 @@
 import getUserData from "./utils/get-user-data.js";
 import oauth2, { config } from "./utils/oauth";
 import superagent from "superagent";
+import connectToDatabase from "./db";
+import users from "./models/users.js";
 
 /* Function to handle intercom auth callback */
 export function handler(event, context, callback) {
@@ -15,7 +17,7 @@ export function handler(event, context, callback) {
       code: code,
       redirect_uri: config.redirect_uri,
       client_id: config.clientId,
-      client_secret: config.clientSecret,
+      client_secret: config.clientSecret
     })
     .then(result => {
       const token = oauth2.accessToken.create(result);
@@ -30,10 +32,11 @@ export function handler(event, context, callback) {
         .set("Authorization", `Bearer ${token.token.access_token}`)
         .then(res => {
           let user = res.body;
+          console.log(user);
           return {
             model: "users",
             git_id: user.id,
-            login: "hingham",
+            login: user.login,
             scope: "user"
           };
         })
@@ -46,23 +49,40 @@ export function handler(event, context, callback) {
       return result;
     })
     .then(user => {
-      superagent.post(`http://localhost:9000/post`).send(user);
+      //TODO: if there isn't a user in the db, save the user
+      return connectToDatabase()
+        .then(() => {
+          users.find({ git_id: user.git_id }, (err, res) => {
+            if (err) console.error(err);
+            console.log("res", res);
+            if (res.length === 0) {
+              console.log('saving data', user);
+              superagent.post(`http://localhost:9000/post`).send(user)
+              .then(response => console.log(response.status))
+              .catch(err => console.error(err) )
+            }
+          });
+          return user;
+        })
+        .catch(err => console.error("err", err));
       // Do stuff with user data
       // console.log('user data', result.data)
       // Do other custom stuff
       // return results to browser
-      return user;
+      // return user;
     })
     .then(result => {
-      console.log('result', result)
-     
+      console.log("result", result);
+
       //return user the homepage
       return callback(null, {
         statusCode: 302,
         headers: {
-          Location: `http://localhost:3000?id=${result.git_id}`,
-          'Cache-Control': 'no-cache' // Disable caching of this response
+          Location: `http://localhost:3000`,
+          "Cache-Control": "no-cache", // Disable caching of this response
+          "Set-Cookie": `user=${result.git_id}; domain=localhost; expires=Thu, 19 July 2019 20:41:27 GMT;`,
         },
+
         body: JSON.stringify(result)
       });
     })

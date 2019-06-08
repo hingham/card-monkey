@@ -101650,7 +101650,8 @@ __webpack_require__.r(__webpack_exports__);
 
 let schema = new mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.Schema({
   login: String,
-  scope: String
+  scope: String,
+  git_id: Number
 }); // module.exports = mongoose.model('Note', NoteSchema);
 
 let users = mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.model('users', schema);

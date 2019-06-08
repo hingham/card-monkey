@@ -30,6 +30,7 @@ export function handler(event, context, callback) {
   connectToDatabase()
     .then(() => {
       let model = getModel(JSON.parse(event.body).model);
+      
       const newRecord = model(JSON.parse(event.body));
       const doc = newRecord.save();
       const response = {
