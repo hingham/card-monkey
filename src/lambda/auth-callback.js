@@ -65,11 +65,7 @@ export function handler(event, context, callback) {
           return user;
         })
         .catch(err => console.error("err", err));
-      // Do stuff with user data
-      // console.log('user data', result.data)
-      // Do other custom stuff
-      // return results to browser
-      // return user;
+
     })
     .then(result => {
       console.log("result", result);

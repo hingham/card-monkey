@@ -2,6 +2,7 @@
 let initialState = {
     deck: "",
     deck_id: "",
+    user_git_id: null
   };
   
   export default (state = initialState, action) => {
@@ -15,6 +16,11 @@ let initialState = {
 
       case "CLEAR":
       return {...state, deck: "", deck_id: ""}
+
+      case "USER":
+      let myState = {...state, user_git_id: payload}
+      console.log(myState);
+      return myState;
   
       default:
         return state;

@@ -12,6 +12,28 @@ import * as actions from "./store/actions.js";
 import { connect } from "react-redux";
 
 class CardMonkey extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      user_id: this.getUser()
+    }
+    console.log('state', this.state);
+  }
+
+   getUser = () =>{
+    console.log('component did mount');
+    const regexp = new RegExp(`.*user=([^;]*)`);
+    const result = regexp.exec(document.cookie);
+    if(result[1]) {
+      console.log(result);
+      this.props.setUser(result[1]);
+    }
+    else{
+      console.log('no logged in');
+    }
+    return result[1];
+  }
+
   render() {
     return (
       <section>
@@ -40,7 +62,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, getState) => ({
   changeDeck: payload => dispatch(actions.changeDeck(payload)),
-  clearDeck: () => dispatch(actions.clearDeck())
+  clearDeck: () => dispatch(actions.clearDeck()),
+  setUser: payload => dispatch(actions.setUser(payload)),
 });
 
 export default connect(

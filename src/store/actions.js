@@ -11,3 +11,10 @@ export const changeDeck = payload => {
       type: "CLEAR",
     }
   }
+
+  export const setUser = payload =>{
+    return {
+      type: "USER",
+      paylod: payload
+    }
+  }

@@ -101608,7 +101608,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
 
 const decksSchema = new mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.Schema({
-  deck: String
+  deck: String,
+  user_id: String
 }); // module.exports = mongoose.model('Note', NoteSchema);
 
 /* harmony default export */ __webpack_exports__["default"] = (mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.model("decks", decksSchema));
