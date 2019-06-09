@@ -39,8 +39,8 @@ class queryComponent extends React.Component {
                 <>
                   <h2>Decks</h2>
                   <div>
-                    {data.decks.map(deck => (
-                      <div onClick={()=> this.updateDeck(deck)}>{deck.deck}</div>
+                    {data.decks.map((deck, i) => (
+                      <div key={`deck${i}`} onClick={()=> this.updateDeck(deck)}>{deck.deck}</div>
                     ))}
                   </div>
                 </>

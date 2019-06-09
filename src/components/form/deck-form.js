@@ -4,7 +4,7 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      deck: null,
+      deck: "",
       model: "deck"
     };
   }

@@ -18,8 +18,9 @@ let initialState = {
       return {...state, deck: "", deck_id: ""}
 
       case "USER":
+      console.log('user payload reducers', payload)
       let myState = {...state, user_git_id: payload}
-      console.log(myState);
+      console.log('redux state', payload, myState);
       return myState;
   
       default:

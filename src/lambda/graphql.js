@@ -1,10 +1,9 @@
 // src-functions/graphql.js
 import { ApolloServer, gql } from "apollo-server-lambda";
-
 import connectToDatabase from "./db";
-import players from "./models/players.js";
 import decks from "./models/decks.js";
 import cards from "./models/cards.js";
+import users from "./models/users.js";
 
 
 connectToDatabase();
@@ -17,7 +16,7 @@ let articles = [
 const typeDefs = gql`
   type Query {
     articles: [Article]
-    players: [Player]
+    user(git_id: Int!): User
     decks: [Deck]
     cards(deck_id: String!): [Card]
   }
@@ -27,8 +26,10 @@ const typeDefs = gql`
     id: Int
   }
 
-  type Player {
-    name: String!
+  type User {
+    _id: String
+    git_id: Int
+    login: String
   }
 
   type Deck {
@@ -48,14 +49,15 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     articles: () => articles,
-    players: () => {
-      return players.find({});
-    },
+
     decks: () => {
       return decks.find({});
     },
     cards: (parent, args) =>{
         return cards.find({deck_id: args.deck_id})
+    },
+    user: (parent, args) =>{
+        return users.findOne({git_id: +args.git_id})
     }
   },
   Deck: {

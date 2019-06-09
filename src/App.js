@@ -14,7 +14,7 @@ import createStore from "./store/index.js";
 import oauth from "./lambda/utils/oauth.js";
 const store = createStore();
 
-const client = new ApolloClient({
+export const client = new ApolloClient({
   link: ApolloLink.from([
     onError(({ graphQLErrors, networkError }) => {
       if (graphQLErrors)
@@ -55,6 +55,7 @@ export default class App extends Component {
       .then(message => console.log(message))
       .catch(error => console.error(error));
   };
+
 
   getCookies = () => {
     console.log( 'cookies', document.cookie );

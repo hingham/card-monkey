@@ -13,8 +13,10 @@ export const changeDeck = payload => {
   }
 
   export const setUser = payload =>{
+
+    console.log('payload from user action', payload)
     return {
       type: "USER",
-      paylod: payload
+      payload: payload
     }
   }
