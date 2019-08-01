@@ -26,12 +26,14 @@ export default function queryComponent({ hello }) {
         }
         return (
           <>
+          <section class="decks">
             <h2>hello</h2>
-            <div>
+            <ul>
               {data.players.map(player => (
-                <div>{player.name}</div>
+                <li>{player.name}</li>
               ))}
-            </div>
+            </ul>
+            </section>
           </>
         );
       }}

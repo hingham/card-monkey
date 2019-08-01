@@ -34,16 +34,14 @@ class Form extends Component {
       <form onSubmit={this.handleFormSubmit}>
         <fieldset>
           <legend>Add a Deck</legend>
-          <label>
-            Deck:
             <input
+              placeholder="deck name"
               name="deck"
               type="text"
               value={this.state.deck}
               onChange={this.handleDeck}
             />
-          </label>
-          <input type="submit" value="Submit" />
+          <button type="submit"> Create Deck </button>
         </fieldset>
       </form>
     );

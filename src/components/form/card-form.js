@@ -48,26 +48,22 @@ class CardForm extends Component {
       <form onSubmit={this.handleFormSubmit}>
         <fieldset>
           <legend>Add a Card</legend>
-          <label>
-            Concept:
+          <label> Concept: </label>
             <input
               name="concept"
               type="text"
               value={this.state.concept}
               onChange={this.handleConcept}
             />
-          </label>
-          <label>
-            Definition:
+          <label>  Definition: </label>
             <textarea
               name="definition"
               type="text-area"
               value={this.state.definition}
               onChange={this.handleDefinition}
             />
-          </label>
-
-          <input type="submit" value="Submit" />
+  
+          <button type="submit">Create Card </button>
         </fieldset>
       </form>
     );

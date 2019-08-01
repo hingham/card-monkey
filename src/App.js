@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Provider } from "react-redux";
 
 import CardMonkey from "./CardMonkey.js";
+import Header from "./components/header/header.js";
 
 import { ApolloProvider } from "react-apollo";
 import { ApolloClient } from "apollo-client";
@@ -11,7 +12,9 @@ import { onError } from "apollo-link-error";
 import { ApolloLink } from "apollo-link";
 
 import createStore from "./store/index.js";
-import oauth from "./lambda/utils/oauth.js";
+
+import "./styles/design.scss";
+
 const store = createStore();
 
 export const client = new ApolloClient({
@@ -58,7 +61,7 @@ export default class App extends Component {
 
 
   getCookies = () => {
-    console.log( 'cookies', document.cookie );
+    console.log( 'cookies ', document.cookie );
   }
 
  
@@ -72,19 +75,22 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <ApolloProvider client={client}>
+          <Header/>
           <div>
             {/* <button onClick={() => this.testPost()}>post</button> */}
             <div>{this.state.message}</div>
             <CardMonkey/>
           </div>
-          <p>Login with github</p>
-          <div onClick={()=>this.goAuth()}>
-            github
-          </div>
-          <a href="/.netlify/functions/auth">github link</a>
+          <section class="login">
+            <h3>Login with github</h3>
+            {/* <div onClick={()=>this.goAuth()}>
+              github
+            </div> */}
+            <a href="/.netlify/functions/auth">github link</a>
+          </section>
         </ApolloProvider>
 
-        <button onClick={()=>this.getCookies()}>get cookies</button>
+        <button onClick={()=>this.getCookies()}>log cookies</button>
       </Provider>
     );
   }

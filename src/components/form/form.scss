@@ -1,0 +1,29 @@
+form{
+
+    background-color: lighten($blue, 0%);
+    padding: 1em;
+    width: fit-content;
+    margin-bottom: 1em;
+
+    legend{
+        color: $blue-invert;
+        font-size: 1.5em;
+        margin-bottom: .5em;
+    }
+
+    label{
+        color: $blue-invert;
+        margin-right: .25em;
+        font-size: 1.25em;
+    }
+
+    input, textarea{
+        padding: .25em;
+        margin-right: 1em;
+    }
+
+    textarea{
+        height: 3em;
+    }
+
+}

@@ -1,0 +1,43 @@
+@import "./variables";
+
+
+body, html{
+    margin: 2em;
+}
+
+body > * {
+    font-family: "Heebo", sans-serif;
+}
+
+p{
+    color: $blue;
+}
+
+textarea{
+    vertical-align: bottom;
+}
+
+h2{
+    font-size: 2em;
+    padding: 1em 1em 1em 0em;
+    text-decoration: underline;
+}
+
+button{
+    padding: .2em;
+    margin: .5em;
+    font-size: .8em;
+}
+
+section.login{
+    padding: 1em 1em 1em 0em;
+    h3{
+        font-size: 1.5em;
+        margin-bottom: 1em;
+    }
+
+    a{
+
+        color: $blue;
+    }
+}

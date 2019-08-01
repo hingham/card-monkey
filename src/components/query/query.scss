@@ -1,0 +1,15 @@
+section.decks{
+    ul{
+        li{
+            padding: .5em .5em .5em 0em;
+            color: $black;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        li:hover{
+            background-color: darken($blue-invert, 5%);
+            width: 50%;
+        }
+    }
+
+}

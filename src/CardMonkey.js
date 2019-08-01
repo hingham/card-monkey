@@ -37,14 +37,15 @@ class CardMonkey extends Component {
   getUser = () => {
     const regexp = new RegExp(`.*user=([^;]*)`);
     const result = regexp.exec(document.cookie);
-    if (result[1]) {
+    if (result && result[1]) {
       console.log( 'the result', result[1] );
       this.props.setUser( result[1] );
+      return result[1];
     } else {
       console.log("not logged in");
     }
     // this.setUserId( parseInt(result[1]) );
-    return result[1];
+   
   };
 
   //TODO: Put this in the reducer and just set in the store
@@ -69,7 +70,6 @@ class CardMonkey extends Component {
   render() {
     return (
       <section>
-        <DeckForm />
         <If condition={this.props.data.deck_id}>
           <Then>
             <h2>{this.props.data.deck}</h2>
@@ -80,6 +80,7 @@ class CardMonkey extends Component {
             <DeckQuery />
           </Else>
         </If>
+        <DeckForm />
 
         <button onClick={this.props.clearDeck}> View Decks </button>
         {/* <Deck /> */}

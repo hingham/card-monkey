@@ -37,12 +37,14 @@ class queryComponent extends React.Component {
               }
               return (
                 <>
+                <section class="decks">
                   <h2>Decks</h2>
-                  <div>
+                  <ul>
                     {data.decks.map((deck, i) => (
-                      <div key={`deck${i}`} onClick={()=> this.updateDeck(deck)}>{deck.deck}</div>
+                      <li key={`deck${i}`} onClick={()=> this.updateDeck(deck)}>{deck.deck}</li>
                     ))}
-                  </div>
+                  </ul>
+                  </section>
                 </>
               );
             }}
