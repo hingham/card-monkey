@@ -45,3 +45,7 @@ Get the functions running
 
 Start the App
 `npm start`
+
+
+## What I had to install
+npm install @types/react-redux

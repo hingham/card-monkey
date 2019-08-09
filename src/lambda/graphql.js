@@ -1,9 +1,9 @@
 // src-functions/graphql.js
 import { ApolloServer, gql } from "apollo-server-lambda";
 import connectToDatabase from "./db";
-import decks from "./models/decks.js";
-import cards from "./models/cards.js";
-import users from "./models/users.js";
+import decks from "./models/decks";
+import cards from "./models/cards";
+import users from "./models/users";
 
 
 connectToDatabase();
@@ -53,18 +53,18 @@ const resolvers = {
     decks: () => {
       return decks.find({});
     },
-    cards: (parent, args) =>{
-        return cards.find({deck_id: args.deck_id})
+    cards: (parent, args) => {
+      return cards.find({ deck_id: args.deck_id })
     },
-    user: (parent, args) =>{
-        return users.findOne({git_id: +args.git_id})
+    user: (parent, args) => {
+      return users.findOne({ git_id: +args.git_id })
     }
   },
   Deck: {
-      cards: (parent, args) =>{
-        console.log('parent', parent);
-        return cards.find({deck_id: parent._id})
-      }
+    cards: (parent, args) => {
+      console.log('parent', parent);
+      return cards.find({ deck_id: parent._id })
+    }
   }
 };
 

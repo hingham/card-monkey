@@ -1,9 +1,9 @@
 //connect to database and schema
 import connectToDatabase from "./db";
-import notes from "./models/note.js";
-import cards from "./models/cards.js";
-import decks from "./models/decks.js";
-import users from "./models/users.js";
+import notes from "./models/note";
+import cards from "./models/cards";
+import decks from "./models/decks";
+import users from "./models/users";
 
 // let model;
 
@@ -30,7 +30,7 @@ export function handler(event, context, callback) {
   connectToDatabase()
     .then(() => {
       let model = getModel(JSON.parse(event.body).model);
-      
+
       const newRecord = model(JSON.parse(event.body));
       const doc = newRecord.save();
       const response = {

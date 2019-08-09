@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Provider } from "react-redux";
 
 import CardMonkey from "./CardMonkey.js";
-import Header from "./components/header/header.js";
+import Header from "./components/header/header";
+import "./styles/design.scss";
 
 import { ApolloProvider } from "react-apollo";
 import { ApolloClient } from "apollo-client";
@@ -11,11 +11,7 @@ import { HttpLink } from "apollo-link-http";
 import { onError } from "apollo-link-error";
 import { ApolloLink } from "apollo-link";
 
-import createStore from "./store/index.js";
 
-import "./styles/design.scss";
-
-const store = createStore();
 
 export const client = new ApolloClient({
   link: ApolloLink.from([
@@ -37,7 +33,7 @@ export const client = new ApolloClient({
 });
 
 export default class App extends Component {
-  state = { 
+  state = {
     message: "",
     deckSelected: false,
   };
@@ -61,37 +57,36 @@ export default class App extends Component {
 
 
   getCookies = () => {
-    console.log( 'cookies ', document.cookie );
+    console.log('cookies ', document.cookie);
   }
 
- 
-  getValues = () =>{
+
+  getValues = () => {
     fetch("/.netlify/functions/auth-callback")
-    .then(res => console.log('did fetch', res))
-    .catch(err => console.error(err));
+      .then(res => console.log('did fetch', res))
+      .catch(err => console.error(err));
   }
 
   render() {
     return (
-      <Provider store={store}>
-        <ApolloProvider client={client}>
-          <Header/>
-          <div>
-            {/* <button onClick={() => this.testPost()}>post</button> */}
-            <div>{this.state.message}</div>
-            <CardMonkey/>
-          </div>
-          <section class="login">
-            <h3>Login with github</h3>
-            {/* <div onClick={()=>this.goAuth()}>
+
+      <ApolloProvider client={client}>
+        <Header />
+        <div>
+          {/* <button onClick={() => this.testPost()}>post</button> */}
+          <div>{this.state.message}</div>
+          <CardMonkey />
+        </div>
+        <section class="login">
+          <h3>Login with github</h3>
+          {/* <div onClick={()=>this.goAuth()}>
               github
             </div> */}
-            <a href="/.netlify/functions/auth">github link</a>
-          </section>
-        </ApolloProvider>
+          <a href="/.netlify/functions/auth">github link</a>
+        </section>
 
-        <button onClick={()=>this.getCookies()}>log cookies</button>
-      </Provider>
+        <button onClick={() => this.getCookies()}>log cookies</button>
+      </ApolloProvider>
     );
   }
 }

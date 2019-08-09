@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import DeckForm from "./components/form/deck-form.js";
-import DeckQuery from "./components/query/deck-query.js";
-import Deck from "./components/deck/deck.js";
-import CardQuery from "./components/query/card-query.js";
-import CardForm from "./components/form/card-form.js";
+import DeckForm from "./components/form/deck-form";
+import DeckQuery from "./components/query/deck-query";
+import CardQuery from "./components/query/card-query";
+import CardForm from "./components/form/card-form";
 
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
@@ -11,7 +10,7 @@ import { client } from "./App.js";
 
 import { If, When, Else, Then } from "./components/conditionals.js";
 
-import * as actions from "./store/actions.js";
+import * as actions from "./store/actions";
 
 import { connect } from "react-redux";
 
@@ -38,33 +37,33 @@ class CardMonkey extends Component {
     const regexp = new RegExp(`.*user=([^;]*)`);
     const result = regexp.exec(document.cookie);
     if (result && result[1]) {
-      console.log( 'the result', result[1] );
-      this.props.setUser( result[1] );
+      console.log('the result', result[1]);
+      this.props.setUser(result[1]);
       return result[1];
     } else {
       console.log("not logged in");
     }
     // this.setUserId( parseInt(result[1]) );
-   
+
   };
 
   //TODO: Put this in the reducer and just set in the store
   setUserId = (git) => {
     //TODO: check if there is already a user saved in the store's session
     //TODO: if already there, do not requery
-    if(git === null){
+    if (git === null) {
       return null;
     }
     client
-    .query({
-      query: USER,
-      variables: { git_id: parseInt(git) }
-    })
-    .then(results => {
-      console.log("results", results);
-      // this.setState({ id: results.data.user._id });
-      return results.data.user._id
-    });
+      .query({
+        query: USER,
+        variables: { git_id: parseInt(git) }
+      })
+      .then(results => {
+        console.log("results", results);
+        // this.setState({ id: results.data.user._id });
+        return results.data.user._id
+      });
   }
 
   render() {

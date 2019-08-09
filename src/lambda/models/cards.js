@@ -5,7 +5,6 @@ const cardSchema = new mongoose.Schema({
   concept: String,
   definition: String,
   deck_id: String,
-  deck: String
 });
 
 // module.exports = mongoose.model('Note', NoteSchema);

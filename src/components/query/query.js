@@ -30,7 +30,7 @@ export default function queryComponent({ hello }) {
             <h2>hello</h2>
             <ul>
               {data.players.map(player => (
-                <li>{player.name}</li>
+                <li key={`${i}-player`}>{player.name}</li>
               ))}
             </ul>
             </section>
