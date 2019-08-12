@@ -2,7 +2,6 @@ import simpleOauth from "simple-oauth2";
 import { userInfo } from "os";
 
 // import {} from 'dotenv/config'
-import { If } from "../../components/conditionals";
 
 const github = "https://github.com";
 /* process.env.URL from netlify BUILD environment variables */
@@ -28,7 +27,7 @@ function authInstance(credentials) {
   if (credentials.client.id && credentials.client.secret) {
     return simpleOauth.create(credentials);
   } else {
-      console.log('missing secret or id');
+    console.log('missing secret or id');
     // throw new Error("missing secret or id");
   }
 }

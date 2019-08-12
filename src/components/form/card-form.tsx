@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import cards from "../../lambda/models/cards";
 import * as actions from "../../store/actions";
 
-
-import { Deck } from "../../types/index";
 import { DeckStore, CardInterface } from "../../types";
 
 
@@ -22,7 +19,8 @@ class CardForm extends Component<CardFormProps, CardInterface>{
   };
 
 
-  handleFormSubmit = () => {
+  handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     console.log('state from card', this.state);
     fetch("/.netlify/functions/post", {
       body: JSON.stringify(this.state),
@@ -56,14 +54,15 @@ class CardForm extends Component<CardFormProps, CardInterface>{
       <form onSubmit={this.handleFormSubmit}>
         <fieldset>
           <legend>Add a Card</legend>
-          <label> Concept: </label>
+          <label htmlFor="concept"> Concept: </label>
           <input
+            id="concept"
             name="concept"
             type="text"
             value={this.state.concept}
             onChange={this.handleConcept}
           />
-          <label>  Definition: </label>
+          <label htmlFor="definition">  Definition: </label>
           <textarea
             name="definition"
             value={this.state.definition}
@@ -78,8 +77,7 @@ class CardForm extends Component<CardFormProps, CardInterface>{
 }
 
 const mapStateToProps = (state: CardFormProps) => ({
-  deck_id: state.data.deck_id,
-  deck: state.data.deck
+  data: state.data
 });
 
 

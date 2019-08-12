@@ -8,7 +8,8 @@ type DeckData = {
 const initialState: DeckStore = {
   deck: "",
   deck_id: "",
-  user_git_id: NaN
+  user_git_id: NaN,
+  user_id: '',
 }
 
 export function deckReducer(state = initialState, action: DeckData): DeckStore {
@@ -33,9 +34,10 @@ export function deckReducer(state = initialState, action: DeckData): DeckStore {
 
     case "USER":
       console.log('user payload reducers', payload)
-      let myState = { ...state, user_git_id: payload }
+      let { git_id, user_id } = payload;
+      let myState = { ...state, user_git_id: git_id, user_id: user_id };
 
-      console.log('redux state', payload, myState);
+      console.log('redux state', myState);
       return myState;
 
     default:

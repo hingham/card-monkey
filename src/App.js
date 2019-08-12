@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 
-import CardMonkey from "./CardMonkey.js";
+import CardMonkey from "./card-monkey";
 import Header from "./components/header/header";
 import "./styles/design.scss";
 
-import { ApolloProvider } from "react-apollo";
+// import { ApolloProvider } from "react-apollo";
+import { ApolloProvider } from "@apollo/react-hooks";
+
+
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-link-http";
@@ -57,7 +60,7 @@ export default class App extends Component {
 
 
   getCookies = () => {
-    console.log('cookies ', document.cookie);
+    console.log('cookies ', document.cookie, typeof document.cookie);
   }
 
 
@@ -77,7 +80,7 @@ export default class App extends Component {
           <div>{this.state.message}</div>
           <CardMonkey />
         </div>
-        <section class="login">
+        <section className="login">
           <h3>Login with github</h3>
           {/* <div onClick={()=>this.goAuth()}>
               github

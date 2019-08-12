@@ -30,7 +30,9 @@ class Form extends Component<{}, Deck> {
       <form onSubmit={this.handleFormSubmit}>
         <fieldset>
           <legend>Add a Deck</legend>
+          <label htmlFor="deck"> Deck Form </label>
           <input
+            id="deck"
             placeholder="deck name"
             name="deck"
             type="text"

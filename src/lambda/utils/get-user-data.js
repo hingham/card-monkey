@@ -42,22 +42,22 @@ import superagent from 'superagent'
 //   })
 // }
 
-export default function getUserData (token) {
-    let myUser;
-    return superagent.get(`https://api.github.com/user?access_token=`)
+export default function getUserData(token) {
+  let myUser;
+  return superagent.get(`https://api.github.com/user?access_token=`)
     .set('Authorization', `Bearer ${token.token.access_token}`)
-    .then(res =>{
-        let user = res.body;
-        console.log('user body', user);   
+    .then(res => {
+      let user = res.body;
+      console.log('user body', user);
 
-        console.log('user', user);
-        let userObj = {
-          model: "users",
-          git_id: user.id,
-          login: "hingham",
-          scope: "user"
-        }  
-        superagent.post(`/.netlify/functions/post`)
+      console.log('user', user);
+      let userObj = {
+        model: "users",
+        git_id: user.id | NaN,
+        login: "hingham",
+        scope: "user"
+      }
+      superagent.post(`/.netlify/functions/post`)
         .send(userObj);
     })
     .catch(err => console.error(err));

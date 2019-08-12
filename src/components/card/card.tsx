@@ -1,19 +1,20 @@
 import React from "react"
 
 type CardProps = {
-  title: string;
-  text: string;
+  concept: string;
+  definition: string;
 }
 
 
 const Card = (props: CardProps) => {
   return (
-    <div className="card">
-      <div>
-        <h4> {props.title} </h4>
-        <p> {props.text} </p>
+    <li className="deck-card">
+      <div >
+        <h4> {props.concept} </h4>
+        <p> {props.definition} </p>
       </div>
-    </div>
+    </li>
   )
 }
+
 export default Card;

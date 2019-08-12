@@ -35,7 +35,7 @@ export function handler(event, context, callback) {
           console.log(user);
           return {
             model: "users",
-            git_id: user.id,
+            git_id: user.id | NaN,
             login: user.login,
             scope: "user"
           };
@@ -58,8 +58,8 @@ export function handler(event, context, callback) {
             if (res.length === 0) {
               console.log('saving data', user);
               superagent.post(`http://localhost:9000/post`).send(user)
-              .then(response => console.log(response.status))
-              .catch(err => console.error(err) )
+                .then(response => console.log(response.status))
+                .catch(err => console.error(err))
             }
           });
           return user;
@@ -76,7 +76,7 @@ export function handler(event, context, callback) {
         headers: {
           Location: `http://localhost:3000`,
           "Cache-Control": "no-cache", // Disable caching of this response
-          "Set-Cookie": `user=${result.git_id}; domain=localhost; expires=Thu, 19 July 2019 20:41:27 GMT;`,
+          "Set-Cookie": `user=${result.git_id}; domain=localhost; expires=Thu, 19 December 2019 20:41:27 GMT;`,
         },
 
         body: JSON.stringify(result)
