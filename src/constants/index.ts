@@ -7,4 +7,7 @@ export type CLEAR = typeof CLEAR;
 export const USER = 'USER';
 export type USER = typeof USER;
 
+export const USERDATA = 'USERDATA';
+export type USERDATA = typeof USERDATA;
+
 

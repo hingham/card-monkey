@@ -40,6 +40,9 @@ export function deckReducer(state = initialState, action: DeckData): DeckStore {
       console.log('redux state', myState);
       return myState;
 
+    case "USERDATA":
+      return { ...state, user_id: '', user_git_id: NaN, deck: "", deck_id: "" };
+
     default:
       return state;
   }

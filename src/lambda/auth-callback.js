@@ -2,7 +2,7 @@ import getUserData from "./utils/get-user-data.js";
 import oauth2, { config } from "./utils/oauth";
 import superagent from "superagent";
 import connectToDatabase from "./db";
-import users from "./models/users.js";
+import users from "./models/users";
 
 /* Function to handle intercom auth callback */
 export function handler(event, context, callback) {
@@ -56,9 +56,9 @@ export function handler(event, context, callback) {
             if (err) console.error(err);
             console.log("res", res);
             if (res.length === 0) {
-              console.log('saving data', user);
+              console.log('recieved data', user);
               superagent.post(`http://localhost:9000/post`).send(user)
-                .then(response => console.log(response.status))
+                .then(response => console.log('the stat !!: ', response.status))
                 .catch(err => console.error(err))
             }
           });

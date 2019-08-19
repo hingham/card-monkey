@@ -33,7 +33,6 @@ function authInstance(credentials) {
 }
 
 /* Create oauth2 instance to use in our two functions */
-
 const creds = {
   client: {
     id: config.clientId,

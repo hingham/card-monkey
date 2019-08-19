@@ -1,6 +1,7 @@
 import React from "react";
 import { DeckStore, CardInterface } from '../../types/index'
 import Card from '../card/card'
+import CardForm from '../form/card-form';
 /* eslint-disable no-unused-expressions */
 /*eslint no-unused-expressions: [2, { allowShortCircuit: true }]*/
 
@@ -8,9 +9,7 @@ import gql from "graphql-tag";
 import { useQuery } from '@apollo/react-hooks'
 import { connect } from "react-redux";
 import { string } from "prop-types";
-
-concept: string;
-definition: string;
+import { addResolveFunctionsToSchema } from "graphql-tools";
 
 interface DeckCardData {
   cards: CardInterface[];
@@ -30,20 +29,17 @@ const DECK_CARDS_QUERY = gql`
   }
 `;
 
-type QueryComProps = {
+type QueryProps = {
   data: DeckStore;
 }
 
-type CardProps = {
-  concept: string;
-  definition: string;
-}
-
-
-function QueryComponent(props: QueryComProps): any {
-  const { loading, error, data } =
+function QueryComponent(props: QueryProps): any {
+  const { loading, error, data, refetch } =
     useQuery<DeckCardData, DeckCardVars>(DECK_CARDS_QUERY, { variables: { deck_id: props.data.deck_id } });
 
+  const refetchData = () => {
+    refetch();
+  }
 
   if (loading) {
     return "Loading...";
@@ -52,22 +48,21 @@ function QueryComponent(props: QueryComProps): any {
     return `Error! ${error.message}`;
   }
   return (
-    <>
+    <div className="cards">
       <ul>
         {data && data.cards.map((card: CardInterface, i: number) => (
           <Card key={`${i}-card`} concept={card.concept} definition={card.definition} />
         ))}
       </ul>
-    </>
+      {/* <button onClick={() => refetchData()}>refetch</button> */}
+      <CardForm refetchData={refetchData} />
+    </div>
   );
-
 }
 
-const mapStateToProps = (state: QueryComProps) => ({
+const mapStateToProps = (state: QueryProps) => ({
   data: state.data
 });
-
-
 
 export default connect(
   mapStateToProps,

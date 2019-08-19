@@ -1,18 +1,38 @@
 import React, { Component } from "react";
-import { Deck } from '../../types/index';
+import { DeckInterface, DeckStore, Deck } from '../../types/index';
 
-class Form extends Component<{}, Deck> {
+import { connect } from 'react-redux';
+import * as actions from "../../store/actions";
 
-  readonly state = { deck: "", model: "deck" };
 
-  handleFormSubmit = () => {
+interface DeckProps {
+  data: DeckStore;
+  refetchData: Function;
+}
+
+class DeckForm extends Component<DeckProps, DeckInterface> {
+
+  state: DeckInterface = {
+    deck: ""
+  };
+
+  handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+    e.preventDefault();
     fetch("/.netlify/functions/post", {
-      body: JSON.stringify(this.state),
+      body: JSON.stringify(
+        new Deck(this.state.deck, this.props.data.user_id)
+      ),
       method: "POST"
     })
       .then(response => response.json())
-      .then(message => console.log(message))
-      .catch(error => console.error(error));
+      .then(message => this.props.refetchData())
+      .catch(error => {
+        console.error(error)
+        // return (
+        //   <div> Error adding card </div>
+        // )
+      });
   };
 
   handleClearForm = () => {
@@ -21,8 +41,8 @@ class Form extends Component<{}, Deck> {
   };
 
   handleDeck = (e: React.FormEvent<HTMLInputElement>) => {
-    this.setState({ deck: e.currentTarget.value });
     e.preventDefault();
+    this.setState({ deck: e.currentTarget.value });
   };
 
   render() {
@@ -46,5 +66,16 @@ class Form extends Component<{}, Deck> {
   }
 }
 
+const mapStateToProps = (state: DeckProps) => ({
+  data: state.data
+});
 
-export default Form;
+
+const mapDispatchToProps = (dispatch: any) => ({
+  changeDeck: (payload: any) => dispatch(actions.changeDeck(payload))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DeckForm);

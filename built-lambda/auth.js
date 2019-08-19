@@ -15954,17 +15954,20 @@ exports.block = function () {
 /*!*****************!*\
   !*** ./auth.js ***!
   \*****************/
-/*! no exports provided */
+/*! exports provided: handler */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handler", function() { return handler; });
 /* harmony import */ var _utils_oauth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/oauth */ "./utils/oauth.js");
 /* code from /functions/auth.js */
+console.log('hello world');
 
+console.log('oauth2', _utils_oauth__WEBPACK_IMPORTED_MODULE_0__["default"]);
 /* Do initial auth redirect */
 
-exports.handler = (event, context, callback) => {
+function handler(event, context, callback) {
   /* Generate authorizationURI */
   console.log('auth.js line 7 log, reporting for duty');
   const authorizationURI = _utils_oauth__WEBPACK_IMPORTED_MODULE_0__["default"].authorizationCode.authorizeURL({
@@ -15990,7 +15993,7 @@ exports.handler = (event, context, callback) => {
 
   };
   return callback(null, response);
-};
+}
 
 /***/ }),
 

@@ -15,6 +15,10 @@ export interface SetUser {
   payload: any;
 }
 
+export interface ClearUserData {
+  type: constants.USERDATA;
+}
+
 
 export const changeDeck = (payload: any): ChangeDeck => {
   return {
@@ -34,6 +38,12 @@ export const setUser = (payload: any): SetUser => {
   return {
     type: "USER",
     payload: payload
+  }
+}
+
+export const clearUserData = (): ClearUserData => {
+  return {
+    type: "USERDATA"
   }
 }
 

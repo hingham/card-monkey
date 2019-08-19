@@ -49,3 +49,22 @@ Start the App
 
 ## What I had to install
 npm install @types/react-redux
+
+
+## How Data is (should) Pulled 
+1. Check that user is loggin in via checking cookies sent from 0auth
+2. Grab all the decks that are associated with that user in the deck-query component
+3. When a deck_id is selected, grab all the cards associated with that deck id (or cards nested in that deck id? would make it rather shallow, but then it would be harder to query based on topic...)
+
+
+
+## Loggin Users Out 
+[Auth0 Docs](https://auth0.com/docs/logout)
+1. Application Session Layer: Remove Cookies
+2. Auth0 Session Layer: clearing SSO cookie???
+3. The App will have to access github again to make sure the user has been verified and given permissions, but since the permission has been given and the app has been authorized you won't be able to login as someone else
+
+## Refresh Cards
+- the Card-Query component implements the Card-Form components
+- Card-Query has access to refetch function from apollo, which is passes down to the card-form component
+- This enables the from submit to trigger a refresh and show the new card added to the deck

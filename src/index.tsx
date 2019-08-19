@@ -5,12 +5,17 @@ import configureStore from "./store";
 
 import App from "./App";
 
+import { ApolloProvider } from "@apollo/react-hooks";
+import { client } from './apollo-client.js';
+
 const store = configureStore();
 
 const Root = () => (
-    <Provider store={store}>
-        <App />
-    </Provider>
+    <ApolloProvider client={client}>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </ApolloProvider>
 );
 
 render(<Root />, document.getElementById("root"));

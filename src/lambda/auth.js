@@ -1,10 +1,14 @@
 /* code from /functions/auth.js */
-import oauth2, { config } from './utils/oauth'
+console.log('hello world');
+import oauth2, { config } from './utils/oauth';
+console.log('oauth2', oauth2);
 
 /* Do initial auth redirect */
-exports.handler = (event, context, callback) => {
+export function handler(event, context, callback) {
   /* Generate authorizationURI */
+
   console.log('auth.js line 7 log, reporting for duty');
+
   const authorizationURI = oauth2.authorizationCode.authorizeURL({
     redirect_uri: config.redirect_uri,
     /* Specify how your app needs to access the user’s account. http://bit.ly/intercom-scopes */
@@ -13,8 +17,8 @@ exports.handler = (event, context, callback) => {
     state: 'randomstring',
   })
 
-    console.log('auth url', authorizationURI);
-    
+  console.log('auth url', authorizationURI);
+
   /* Redirect user to authorizationURI */
   const response = {
     statusCode: 302,

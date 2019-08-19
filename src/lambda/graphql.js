@@ -18,6 +18,7 @@ const typeDefs = gql`
     articles: [Article]
     user(git_id: Int!): User
     decks: [Deck]
+    myDecks(owner_id: String!, first: Int): [Deck]
     cards(deck_id: String!): [Card]
   }
   type Article {
@@ -53,11 +54,17 @@ const resolvers = {
     decks: () => {
       return decks.find({});
     },
+    myDecks: (parent, args) => {
+      if (args.first) {
+        return decks.find({ owner_id: args.owner_id }).limit(args.first);
+      }
+      return decks.find({ owner_id: args.owner_id });
+    },
     cards: (parent, args) => {
       return cards.find({ deck_id: args.deck_id })
     },
     user: (parent, args) => {
-      return users.findOne({ git_id: +args.git_id })
+      return users.findOne({ git_id: args.git_id })
     }
   },
   Deck: {

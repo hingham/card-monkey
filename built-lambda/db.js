@@ -6786,81 +6786,6 @@ module.exports.Timestamp = Timestamp;
 
 /***/ }),
 
-/***/ "../../node_modules/dotenv/config.js":
-/*!*************************************************************************************************!*\
-  !*** /Users/hannah.ingham/Documents/available/lambda/card-monkey/node_modules/dotenv/config.js ***!
-  \*************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* @flow */
-
-(function () {
-  __webpack_require__(/*! ./lib/main */ "../../node_modules/dotenv/lib/main.js").config(
-    Object.assign(
-      {},
-      __webpack_require__(/*! ./lib/env-options */ "../../node_modules/dotenv/lib/env-options.js"),
-      __webpack_require__(/*! ./lib/cli-options */ "../../node_modules/dotenv/lib/cli-options.js")(process.argv)
-    )
-  )
-})()
-
-
-/***/ }),
-
-/***/ "../../node_modules/dotenv/lib/cli-options.js":
-/*!**********************************************************************************************************!*\
-  !*** /Users/hannah.ingham/Documents/available/lambda/card-monkey/node_modules/dotenv/lib/cli-options.js ***!
-  \**********************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/* @flow */
-
-const re = /^dotenv_config_(encoding|path|debug)=(.+)$/
-
-module.exports = function optionMatcher (args /*: Array<string> */) {
-  return args.reduce(function (acc, cur) {
-    const matches = cur.match(re)
-    if (matches) {
-      acc[matches[1]] = matches[2]
-    }
-    return acc
-  }, {})
-}
-
-
-/***/ }),
-
-/***/ "../../node_modules/dotenv/lib/env-options.js":
-/*!**********************************************************************************************************!*\
-  !*** /Users/hannah.ingham/Documents/available/lambda/card-monkey/node_modules/dotenv/lib/env-options.js ***!
-  \**********************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/* @flow */
-
-// ../config.js accepts options via environment variables
-const options = {}
-
-if (process.env.DOTENV_CONFIG_ENCODING != null) {
-  options.encoding = process.env.DOTENV_CONFIG_ENCODING
-}
-
-if (process.env.DOTENV_CONFIG_PATH != null) {
-  options.path = process.env.DOTENV_CONFIG_PATH
-}
-
-if (process.env.DOTENV_CONFIG_DEBUG != null) {
-  options.debug = process.env.DOTENV_CONFIG_DEBUG
-}
-
-module.exports = options
-
-
-/***/ }),
-
 /***/ "../../node_modules/dotenv/lib/main.js":
 /*!***************************************************************************************************!*\
   !*** /Users/hannah.ingham/Documents/available/lambda/card-monkey/node_modules/dotenv/lib/main.js ***!
@@ -101543,13 +101468,11 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! mongoose */ "../../node_modules/mongoose/index.js");
-/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var dotenv_config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! dotenv/config */ "../../node_modules/dotenv/config.js");
-/* harmony import */ var dotenv_config__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(dotenv_config__WEBPACK_IMPORTED_MODULE_1__);
+let mongoose = __webpack_require__(/*! mongoose */ "../../node_modules/mongoose/index.js");
 
+__webpack_require__(/*! dotenv */ "../../node_modules/dotenv/lib/main.js").config();
 
-mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.Promise = global.Promise;
+mongoose.Promise = global.Promise;
 let isConnected;
 console.log('password', process.env.MONGO_PASSWORD);
 const options = {
@@ -101563,7 +101486,7 @@ const options = {
   }
 
   console.log('=> using new database connection');
-  return mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.connect(`mongodb+srv://hingham:${process.env.MONGO_PASSWORD}@cluster0-zuiec.mongodb.net/test?retryWrites=true&w=majority`, options).then(db => {
+  return mongoose.connect(`mongodb+srv://hingham:${process.env.MONGO_PASSWORD}@cluster0-zuiec.mongodb.net/card-monkey?retryWrites=true&w=majority`, options).then(db => {
     isConnected = db.connections[0].readyState;
   }).catch(err => console.error(err));
 });
