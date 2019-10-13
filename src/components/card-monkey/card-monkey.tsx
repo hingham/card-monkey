@@ -1,15 +1,13 @@
-import React, { Component } from "react";
+import React, { Component, MouseEvent } from "react";
 import DeckForm from "../form/deck-form";
 import DeckQuery from "../query/deck-query";
 import CardQuery from "../query/card-query";
 import Welcome from "../welcome/welcome";
 
-import { DeckStore, UserInterface } from '../../types/index';
+import { DeckStore, UserIdInterface } from '../../types/index';
 
 import gql from "graphql-tag";
 import { client } from "../../apollo-client";
-
-import { If, Else, Then } from "../utils/conditionals";
 
 import * as actions from "../../store/actions";
 import { connect } from "react-redux";
@@ -24,17 +22,18 @@ const USER = gql`
 
 type PropTypes = {
     data: DeckStore;
-    setUser: Function;
-    clearDeck: Function;
+    setUser: (id: UserIdInterface) => { type: "USER", payload: any };
+    // clearDeck: any;
+    clearDeck: (e: MouseEvent) => { type: "CLEAR" };
 }
 
-interface CardMonkeyState extends UserInterface {
+interface CardMonkeyState extends UserIdInterface {
     promise: Promise<number>
 }
 
 
-class CardMonkey extends Component<any, CardMonkeyState> {
-    constructor(props: any) {
+class CardMonkey extends Component<PropTypes, CardMonkeyState> {
+    constructor(props: PropTypes) {
         super(props);
         this.state = {
             promise: this.getUser(),
@@ -51,10 +50,10 @@ class CardMonkey extends Component<any, CardMonkeyState> {
             console.log('the result', result[1]);
 
             let git_id = parseInt(result[1]);
-            let user_id = await this.setUserId(git_id);
-            this.props.setUser({ git_id, user_id });
+            let _id = await this.setUserId(git_id);
+            this.props.setUser({ git_id, _id });
 
-            console.log(`the values ${git_id}, ${user_id}`);
+            console.log(`the values ${git_id}, ${_id}`);
 
             return parseInt(result[1]);
         } else {
@@ -84,7 +83,8 @@ class CardMonkey extends Component<any, CardMonkeyState> {
                         <section>
                             <h2>{this.props.data.deck}</h2>
                             <CardQuery />
-                            <button onClick={this.props.clearDeck}> View Decks </button>
+                            <button onClick={this.props.clearDeck}> View Decks
+                            </button>
                         </section>
                     </>
                 )
@@ -108,8 +108,8 @@ const mapStateToProps = (state: PropTypes) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    clearDeck: () => dispatch(actions.clearDeck()),
-    setUser: (payload: UserInterface) => dispatch(actions.setUser(payload))
+    clearDeck: (e: any) => dispatch(actions.clearDeck(e)),
+    setUser: (payload: UserIdInterface) => dispatch(actions.setUser(payload))
 });
 
 export default connect(

@@ -27,7 +27,7 @@ export interface DeckInterface {
     owner_id?: string;
 }
 
-export interface UserInterface {
+export interface UserIdInterface {
     _id: string;
     git_id: number;
 }
@@ -37,7 +37,7 @@ export interface UserInterface {
 export class Card implements CardInterface {
     concept: string;
     definition: string;
-    model: string = "cards";
+    model: string;
     deck: string;
     deck_id: string;
 

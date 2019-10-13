@@ -25,17 +25,19 @@ class CardForm extends Component<CardFormProps, CardFormInterface>{
 
   handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let { concept, definition } = this.state;
-    let { deck, deck_id } = this.props.data;
 
-    let newCard = new Card(concept, definition, deck, deck_id);
-    console.log('state from card', newCard);
+    const { concept, definition } = this.state;
+    const { deck, deck_id } = this.props.data;
+
+    const newCard = new Card(concept, definition, deck, deck_id);
+
     fetch("/.netlify/functions/post", {
       body: JSON.stringify(newCard),
       method: "POST"
     })
-      .then(response => response.json())
-      .then(message => this.props.refetchData())
+      // Q: do I need this? 
+      // .then(response => response.json())
+      .then(() => this.props.refetchData())
       .catch(error => {
         console.log(error);
         return <div> error </div>

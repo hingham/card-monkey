@@ -1,5 +1,6 @@
 
 import * as constants from '../constants/';
+import { UserIdInterface } from "../types/index";
 
 export interface ChangeDeck {
   type: constants.DECK;
@@ -11,8 +12,8 @@ export interface ClearDeck {
 }
 
 export interface SetUser {
-  type: constants.USER;
-  payload: any;
+  type: constants.SETUSER;
+  payload: UserIdInterface;
 }
 
 export interface ClearUserData {
@@ -27,17 +28,17 @@ export const changeDeck = (payload: any): ChangeDeck => {
   };
 }
 
-export const clearDeck = (): ClearDeck => {
+export const clearDeck = (event: MouseEvent): ClearDeck => {
   return {
     type: "CLEAR"
   }
 }
 
 
-export const setUser = (payload: any): SetUser => {
+export const setUser = (userIdObj: UserIdInterface): SetUser => {
   return {
-    type: "USER",
-    payload: payload
+    type: "SETUSER",
+    payload: userIdObj
   }
 }
 

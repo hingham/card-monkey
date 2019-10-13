@@ -1,5 +1,5 @@
 import React from "react";
-import { DeckStore, CardInterface } from '../../types/index'
+import { DeckStore, CardInterface, UserIdInterface } from '../../types/index'
 import Card from '../card/card'
 import CardForm from '../form/card-form';
 /* eslint-disable no-unused-expressions */
@@ -29,11 +29,11 @@ const DECK_CARDS_QUERY = gql`
   }
 `;
 
-type QueryProps = {
+type PropTypes = {
   data: DeckStore;
 }
 
-function QueryComponent(props: QueryProps): any {
+function QueryComponent(props: PropTypes): any {
   const { loading, error, data, refetch } =
     useQuery<DeckCardData, DeckCardVars>(DECK_CARDS_QUERY, { variables: { deck_id: props.data.deck_id } });
 
@@ -60,7 +60,7 @@ function QueryComponent(props: QueryProps): any {
   );
 }
 
-const mapStateToProps = (state: QueryProps) => ({
+const mapStateToProps = (state: { data: DeckStore }) => ({
   data: state.data
 });
 

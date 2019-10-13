@@ -32,10 +32,10 @@ export function deckReducer(state = initialState, action: DeckData): DeckStore {
       }
 
 
-    case "USER":
+    case "SETUSER":
       console.log('user payload reducers', payload)
-      let { git_id, user_id } = payload;
-      let myState = { ...state, user_git_id: git_id, user_id: user_id };
+      let { git_id, _id } = payload;
+      let myState = { ...state, user_git_id: git_id, user_id: _id };
 
       console.log('redux state', myState);
       return myState;
