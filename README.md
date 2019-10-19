@@ -47,10 +47,6 @@ Start the App
 `npm start`
 
 
-## What I had to install
-npm install @types/react-redux
-
-
 ## How Data is (should) Pulled 
 1. Check that user is loggin in via checking cookies sent from 0auth
 2. Grab all the decks that are associated with that user in the deck-query component
@@ -58,7 +54,7 @@ npm install @types/react-redux
 
 
 
-## Loggin Users Out 
+## Logging Users Out 
 [Auth0 Docs](https://auth0.com/docs/logout)
 1. Application Session Layer: Remove Cookies
 2. Auth0 Session Layer: clearing SSO cookie???

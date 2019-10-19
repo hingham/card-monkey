@@ -8,23 +8,12 @@ import users from "./models/users";
 
 connectToDatabase();
 
-let articles = [
-  { title: "my-title", body: "my body", id: 1 },
-  { title: "my-next-title", body: "my next body", id: 2 }
-];
-
 const typeDefs = gql`
   type Query {
-    articles: [Article]
     user(git_id: Int!): User
     decks: [Deck]
     myDecks(owner_id: String!, first: Int): [Deck]
     cards(deck_id: String!): [Card]
-  }
-  type Article {
-    title: String
-    body: String
-    id: Int
   }
 
   type User {
