@@ -1,0 +1,90 @@
+section.decks{
+    @include flex(column, flex-start, flex-start);
+
+    div#quiz-start {
+        // color: $white;
+        background-color: ($green);
+        @include box-shadow;   
+        padding: 4em 2em 4em 2em;
+        margin-bottom: 2em;
+        box-sizing: border-box;
+        width: 95%;
+
+        h2{
+            width: fit-content;
+            cursor: pointer;
+            margin: auto;
+        }
+    }
+
+
+
+    div {
+        width: 100%;
+        @include flex(row, flex-start, space-between);
+        flex-wrap: wrap;
+
+        section {
+            width: 50%;
+            @include flex(column, center, center);
+        
+            > h2 {
+                width: 100%;
+                @include flex(row, flex-end, flex-start);
+            }
+
+            > ul{         
+                width: 100%;
+
+                li{
+                    background-color: lighten($yellow, 5%);
+                    box-sizing: border-box; 
+                    cursor: pointer;
+                    font-size: 1.1em;
+                    margin: 15px 20px 0 0;
+                    padding: 1.5em;
+                    @include box-shadow;   
+                }
+        
+                li:hover{
+                    background-color: $yellow;
+                }
+            }
+        }
+    }
+}
+
+section.decks > div > section#user-actions {
+    
+    ul{
+        @include flex(row, center, center);
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+
+        li{
+            border: 10px solid $yellow;
+            background-color: $white;
+            width: 250px;
+            font-size: 1.2em;
+            margin: 5px;
+            text-align: center;
+        &:hover {
+            background-color: $yellow;
+        }
+            h4{
+                margin-bottom: 1em;
+            }
+        }
+    }
+}
+
+div.cards{
+
+    @include flex(row, flex-start, flex-start);
+    ul{
+        width: 50%;
+        margin: 1em 1em 1em 0em;
+    }    
+
+}

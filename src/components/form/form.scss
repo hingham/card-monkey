@@ -1,0 +1,86 @@
+form{
+    padding: 1em;
+    width: fit-content;
+    margin-bottom: 1em;
+
+
+    legend{
+        margin-bottom: .5em;
+    }
+
+    label{
+        margin-right: .25em;
+    }
+
+
+    input, textarea{
+        padding: .25em;
+        margin-right: 1em;
+    }
+
+    textarea{
+        height: 3em;
+    }
+}
+
+form.card {
+    background-color: lighten($yellow, 5%);
+    box-shadow: 0 10px 6px -6px #777;
+    width: 50%;
+    margin-top: 1em;
+
+    legend {
+        font-size: 1.2em;
+        text-decoration: underline;
+    }
+
+    fieldset{
+        @include flex(column, flex-end, flex-end);
+    }
+
+    label{
+        margin-top: 1em;
+    }
+
+    input, textarea {
+        display: block;
+    }
+
+    textarea{
+        width: 80%;
+    }
+
+    button {
+        margin-top: 1em;
+        padding: .5em;
+        border-radius: 10px;
+        background-color: lighten($brown, 35%);
+    }
+}
+
+section#card-page-actions {
+ width: 50%;
+    > ul {
+        // width: 100%;
+        margin: .5em auto;
+        li{
+        background-color: $green;
+        border-radius: 100px;
+        cursor: pointer;
+        @include box-shadow;
+        height: 3em;
+        @include flex(column, center, center);
+        font-size: 1.5em;
+        padding: 5px;
+        margin: 10px auto;
+        width: 100%;
+
+            &:hover {
+                background-color: darken($green, 20%);
+            }
+        }
+
+    }
+
+}
+

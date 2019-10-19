@@ -1,11 +1,15 @@
-import mongoose from 'mongoose';
+let mongoose = require('mongoose');
+require('dotenv').config();
+
 mongoose.Promise = global.Promise;
 let isConnected;
 
+console.log('password', process.env.MONGO_PASSWORD);
+
 const options = {
-    useNewUrlParser:true,
-    useCreateIndex: true,
-  };
+  useNewUrlParser: true,
+  useCreateIndex: true,
+};
 
 export default function () {
   if (isConnected) {
@@ -14,10 +18,10 @@ export default function () {
   }
 
   console.log('=> using new database connection');
-  return mongoose.connect(`mongodb+srv://hingham:mongopples@cluster0-zuiec.mongodb.net/test?retryWrites=true&w=majority`, options)
-    .then(db => { 
+  return mongoose.connect(`mongodb+srv://hingham:${process.env.MONGO_PASSWORD}@cluster0-zuiec.mongodb.net/card-monkey?retryWrites=true&w=majority`, options)
+    .then((db) => {
       isConnected = db.connections[0].readyState;
     })
-    .catch(err => console.error(err));
+    .catch((err) => console.error(err));
 };
 

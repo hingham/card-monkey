@@ -1,0 +1,38 @@
+
+li.deck-card {
+    
+    width: 100%;
+    @include box-shadow;
+    background-color: lighten($brown, 50%);
+    box-sizing: border-box;
+
+    > div {
+    margin-bottom: 1em;
+    padding: 1em 1em 1em .5em;
+    position: relative;
+    width: 100%;
+
+    p{
+    padding: 1em 4em 1em 1em;
+
+    }
+
+    h4{
+        font-size: 1.5em;
+        margin-bottom: .2em;
+    }
+
+    div {
+        background-color: $white;
+        border-radius: 100%;
+        width: 40px;
+        height: 40px;
+        @include flex(row, center,center);
+        position: absolute;
+        right: 10%;
+        top: 5px;
+    }
+
+    }
+
+}

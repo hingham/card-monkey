@@ -1,0 +1,18 @@
+@mixin flex($rowCol, $align, $justify) {
+    display: flex;
+    flex-direction: $rowCol;
+    align-items: $align;
+    justify-content: $justify;
+  }
+  
+  @mixin center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  @mixin box-shadow{
+    -webkit-box-shadow:  0px 3px 6px -2px #777;
+    -moz-box-shadow:  0px 3px 6px -2px#777;
+         box-shadow: 0px 3px 6px -2px #777777;     
+  }

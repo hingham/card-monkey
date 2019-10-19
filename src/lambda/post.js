@@ -1,22 +1,14 @@
 //connect to database and schema
 import connectToDatabase from "./db";
-import notes from "./models/note.js";
-import cards from "./models/cards.js";
-import decks from "./models/decks.js";
+import cards from "./models/cards";
+import decks from "./models/decks";
+import users from "./models/users";
 
-// let model;
 
 function getModel(m) {
-  if (m === "notes") {
-    // model = notes;
-    return notes;
-  } else if (m === "decks") {
-    // model = decks;
-    return decks;
-  } else if (m === "cards") {
-    // model = cards;
-    return cards;
-  }
+  if (m === "users") return users;
+  else if (m === "deck") return decks;
+  else if (m === "cards") return cards;
 }
 
 export function handler(event, context, callback) {
@@ -26,7 +18,10 @@ export function handler(event, context, callback) {
 
   connectToDatabase()
     .then(() => {
+
       let model = getModel(JSON.parse(event.body).model);
+
+      console.log('what is it????? ', typeof model);
 
       const newRecord = model(JSON.parse(event.body));
       const doc = newRecord.save();
