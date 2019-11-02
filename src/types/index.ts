@@ -19,6 +19,15 @@ export interface CardInterface {
     definition: string,
     deck_id?: string,
     model?: string
+    _id: string;
+}
+
+export interface CardInputInterface {
+    deck?: string;
+    concept: string;
+    definition: string,
+    deck_id?: string,
+    model?: string
 }
 
 export interface DeckInterface {
@@ -34,7 +43,7 @@ export interface UserIdInterface {
 
 
 
-export class Card implements CardInterface {
+export class Card implements CardInputInterface {
     concept: string;
     definition: string;
     model: string;

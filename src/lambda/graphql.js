@@ -38,7 +38,6 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    articles: () => articles,
 
     decks: () => {
       return decks.find({});

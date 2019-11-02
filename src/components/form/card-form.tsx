@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import * as actions from "../../store/actions";
-import { DeckStore, CardInterface, Card } from "../../types";
+import { DeckStore, CardInputInterface, Card } from "../../types";
 
 interface CardFormProps {
   data: DeckStore;
   refetchData: Function;
 }
 
-interface CardFormInterface extends CardInterface {
+interface CardFormInterface extends CardInputInterface {
   toggleForm: boolean;
 }
 
@@ -35,7 +35,7 @@ class CardForm extends Component<CardFormProps, CardFormInterface>{
       body: JSON.stringify(newCard),
       method: "POST"
     })
-      // Q: do I need this? 
+      // Q: do I need this?
       // .then(response => response.json())
       .then(() => this.props.refetchData())
       .catch(error => {

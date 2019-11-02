@@ -22,7 +22,6 @@ export function handler(event, context, callback) {
       let model = getModel(JSON.parse(event.body).model);
 
       console.log('what is it????? ', typeof model);
-
       const newRecord = model(JSON.parse(event.body));
       const doc = newRecord.save();
       const response = {

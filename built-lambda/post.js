@@ -101488,6 +101488,7 @@ const options = {
   console.log('=> using new database connection');
   return mongoose.connect(`mongodb+srv://hingham:${process.env.MONGO_PASSWORD}@cluster0-zuiec.mongodb.net/card-monkey?retryWrites=true&w=majority`, options).then(db => {
     isConnected = db.connections[0].readyState;
+    return db.connections[0].db;
   }).catch(err => console.error(err));
 });
 ;
@@ -101522,6 +101523,9 @@ const cardSchema = new mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.Schema({
   deck_id: {
     type: String,
     required: true
+  },
+  card_id: {
+    type: String
   }
 });
 /* harmony default export */ __webpack_exports__["default"] = (mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.model("cards", cardSchema));
@@ -101565,8 +101569,7 @@ let schema = new mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.Schema({
   login: String,
   scope: String,
   git_id: Number
-}); // module.exports = mongoose.model('Note', NoteSchema);
-
+});
 let users = mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.model('users', schema);
 /* harmony default export */ __webpack_exports__["default"] = (users);
 

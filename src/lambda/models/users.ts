@@ -6,7 +6,6 @@ let schema = new mongoose.Schema({
   git_id: Number,
 });
 
-// module.exports = mongoose.model('Note', NoteSchema);
 let users = mongoose.model('users', schema);
 
 export default users;
