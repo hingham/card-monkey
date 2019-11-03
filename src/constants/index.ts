@@ -11,3 +11,10 @@ export const USERDATA = 'USERDATA';
 export type USERDATA = typeof USERDATA;
 
 
+export const NEWDECK = 'NEWDECK';
+export type NEWDECK = typeof NEWDECK;
+
+export const CREATEDECK = 'CREATEDECK';
+export type CREATEDECK = typeof CREATEDECK;
+
+

@@ -61,54 +61,31 @@ function QueryComponent(props: QueryComProps): any {
 
   return (
     <>
-      <section className="decks">
-        <div className="box-shawdow" id="quiz-start">
-          <h2 onClick={() => console.log('clicked quiz me')}>
-            Quiz Me
+      {/* <div className="box-shawdow" id="quiz-start">
+        <h2 onClick={() => console.log('clicked quiz me')}>
+          Quiz Me
+        </h2>
+      </div> */}
+
+      <div id="decks">
+        <section>
+          <h2>Recent Decks
+          <span style={{ margin: "0em 0em -10px 20px" }}>
+              < DeckSVG width="15%" />
+            </span>
           </h2>
-        </div>
-
-        <div>
-          <section>
-            <h2>Recent Decks
-           <span style={{ margin: "0em 0em -10px 20px" }}>
-                < DeckSVG width="15%" />
-              </span>
-            </h2>
-            <ul>
-              {data && data.myDecks && data.myDecks.map((deck, i) => (
-                <li key={`deck${i}`} onClick={() => props.changeDeck(deck)}>
-                  {deck.deck}
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          <section id="user-actions">
-            <ul>
-              <li>
-                <h4>Create New Deck</h4>
-                <DeckThumbSVG width="40%" />
+          <ul>
+            {data && data.myDecks && data.myDecks.map((deck, i) => (
+              <li key={`deck${i}`} onClick={() => props.changeDeck(deck)}>
+                {deck.deck}
               </li>
-              <li>
-                <h4>Create New Card</h4>
-                <CardSVG width="40%" />
-              </li>
-              <li>
-                <h4>Your Decks</h4>
-                < DeckSVG width="40%" />
-              </li>
-              <li>
-                <h4>Trending Decks</h4>
-                < DeckSVG width="40%" />
-              </li>
-            </ul>
-          </section>
-        </div>
+            ))}
+          </ul>
+        </section>
+      </div>
 
-        {/* <DeckForm refetchData={refetch} /> */}
+      {/* <DeckForm refetchData={refetch} /> */}
 
-      </section>
     </>
   )
 }

@@ -36,8 +36,10 @@ class CardForm extends Component<CardFormProps, CardFormInterface>{
       method: "POST"
     })
       // Q: do I need this?
-      // .then(response => response.json())
-      .then(() => this.props.refetchData())
+      .then(() => {
+        this.props.refetchData()
+        this.setState({ toggleForm: !this.state.toggleForm });
+      })
       .catch(error => {
         console.log(error);
         return <div> error </div>

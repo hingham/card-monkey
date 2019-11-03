@@ -1,0 +1,29 @@
+section#user-actions {
+    ul{
+        @include flex(row, center, center);
+        width: 100%;
+        // display: flex;
+        flex-wrap: wrap;
+
+        li{
+            background-color: lighten($yellow, 5%);
+            box-sizing: border-box;
+            border: 5px solid $yellow;
+            background-color: $white;
+            width: 225px;
+            font-size: 1.2em;
+            text-align: center;
+            cursor: pointer;
+            margin: 15px 20px 0 0;
+            padding: 1.5em;
+            @include box-shadow;
+
+        &:hover {
+            background-color: $yellow;
+        }
+            h4 {
+                margin-bottom: 1em;
+            }
+        }
+    }
+}

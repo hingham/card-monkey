@@ -20,6 +20,15 @@ export interface ClearUserData {
   type: constants.USERDATA;
 }
 
+export interface NewDeck {
+  type: constants.NEWDECK;
+}
+
+export interface CreateDeck {
+  type: constants.CREATEDECK;
+  payload: any;
+}
+
 
 export const changeDeck = (payload: any): ChangeDeck => {
   return {
@@ -48,4 +57,18 @@ export const clearUserData = (): ClearUserData => {
   }
 }
 
-export type DeckData = ChangeDeck | ClearDeck | SetUser;
+export const newDeck = (): NewDeck => {
+  return {
+    type: "NEWDECK"
+  }
+}
+
+export const createDeck = (payload: any): CreateDeck => {
+  return {
+    type: "CREATEDECK",
+    payload: payload
+  }
+}
+
+
+export type DeckData = ChangeDeck | ClearDeck | SetUser | NewDeck;

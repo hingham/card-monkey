@@ -10,6 +10,7 @@ const initialState: DeckStore = {
   deck_id: "",
   user_git_id: NaN,
   user_id: '',
+  deck_creation: false
 }
 
 export function deckReducer(state = initialState, action: DeckData): DeckStore {
@@ -42,6 +43,12 @@ export function deckReducer(state = initialState, action: DeckData): DeckStore {
 
     case "USERDATA":
       return { ...state, user_id: '', user_git_id: NaN, deck: "", deck_id: "" };
+
+    case "NEWDECK":
+      return { ...state, deck_creation: true };
+
+    case "CREATEDECK":
+      return { ...state, deck_creation: false };
 
     default:
       return state;

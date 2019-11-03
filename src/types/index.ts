@@ -4,7 +4,8 @@ export type DeckStore = {
     deck: string,
     deck_id: string,
     user_git_id: number,
-    user_id: string
+    user_id: string,
+    deck_creation: boolean;
 }
 
 // export type Deck = {

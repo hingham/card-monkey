@@ -101605,20 +101605,21 @@ function handler(event, context, callback) {
   console.log("event body", JSON.parse(event.body));
   Object(_db__WEBPACK_IMPORTED_MODULE_0__["default"])().then(() => {
     let model = getModel(JSON.parse(event.body).model);
-    console.log('what is it????? ', typeof model);
     const newRecord = model(JSON.parse(event.body));
-    const doc = newRecord.save();
+    return newRecord.save();
     const response = {
       statusCode: 200,
       body: JSON.stringify(doc)
     };
     return response;
   }).then(res => {
+    // console.log("res", res);
+    const response = JSON.stringify({
+      res: res
+    });
     callback(null, {
       statusCode: 200,
-      body: JSON.stringify({
-        message: "message saved"
-      })
+      body: response
     });
   }).catch(err => console.error(err));
 }

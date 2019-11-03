@@ -1,5 +1,8 @@
 @import "./variables";
 
+//     @include flex(column, flex-start, flex-start);
+
+
 body, html{
     height: 100%;
 }
@@ -76,4 +79,8 @@ section.login{
         -ms-transform:skew(8deg) rotate(3deg);
          -o-transform:skew(8deg) rotate(3deg);
             transform:skew(8deg) rotate(3deg);
+}
+
+section.deck-actions{
+    @include flex(row, flex-start, flex-start);
 }

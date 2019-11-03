@@ -7,7 +7,8 @@ import * as actions from "../../store/actions";
 
 interface DeckProps {
   data: DeckStore;
-  refetchData: Function;
+  createDeck: Function;
+  // refetchData: Function;
 }
 
 class DeckForm extends Component<DeckProps, DeckInterface> {
@@ -25,13 +26,16 @@ class DeckForm extends Component<DeckProps, DeckInterface> {
       ),
       method: "POST"
     })
-      .then(response => response.json())
-      .then(message => this.props.refetchData())
+      .then(response => {
+        console.log("RESPONSE", response);
+        this.props.createDeck(response);
+      })
+      // .then(message => this.props.refetchData())
       .catch(error => {
         console.error(error)
-        // return (
-        //   <div> Error adding card </div>
-        // )
+        return (
+          <div> Error adding deck </div>
+        )
       });
   };
 
@@ -72,7 +76,7 @@ const mapStateToProps = (state: DeckProps) => ({
 
 
 const mapDispatchToProps = (dispatch: any) => ({
-  changeDeck: (payload: any) => dispatch(actions.changeDeck(payload))
+  createDeck: (payload: any) => dispatch(actions.createDeck(payload))
 });
 
 export default connect(
