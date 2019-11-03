@@ -23,11 +23,7 @@ export function handler(event, context, callback) {
 
       const newRecord = model(JSON.parse(event.body));
       return newRecord.save();
-      const response = {
-        statusCode: 200,
-        body: JSON.stringify(doc)
-      };
-      return response;
+
     })
     .then(res => {
       // console.log("res", res);

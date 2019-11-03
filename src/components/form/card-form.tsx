@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, MouseEvent } from "react";
 import { connect } from 'react-redux';
 import * as actions from "../../store/actions";
 import { DeckStore, CardInputInterface, Card } from "../../types";
@@ -6,6 +6,7 @@ import { DeckStore, CardInputInterface, Card } from "../../types";
 interface CardFormProps {
   data: DeckStore;
   refetchData: Function;
+  clearDeck: (event: MouseEvent) => { type: "CLEAR" };
 }
 
 interface CardFormInterface extends CardInputInterface {
@@ -99,7 +100,7 @@ class CardForm extends Component<CardFormProps, CardFormInterface>{
           <li onClick={() => this.toggleForm()}>
             + Search Cards
           </li>
-          <li onClick={() => this.toggleForm()}>
+          <li onClick={this.props.clearDeck}>
             + View Decks
           </li>
         </ul>
@@ -115,7 +116,8 @@ const mapStateToProps = (state: CardFormProps) => ({
 
 
 const mapDispatchToProps = (dispatch: any) => ({
-  changeDeck: (payload: any) => dispatch(actions.changeDeck(payload))
+  changeDeck: (payload: any) => dispatch(actions.changeDeck(payload)),
+  clearDeck: (e: any) => dispatch(actions.clearDeck(e)),
 });
 
 export default connect(

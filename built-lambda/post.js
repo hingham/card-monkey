@@ -101607,11 +101607,6 @@ function handler(event, context, callback) {
     let model = getModel(JSON.parse(event.body).model);
     const newRecord = model(JSON.parse(event.body));
     return newRecord.save();
-    const response = {
-      statusCode: 200,
-      body: JSON.stringify(doc)
-    };
-    return response;
   }).then(res => {
     // console.log("res", res);
     const response = JSON.stringify({

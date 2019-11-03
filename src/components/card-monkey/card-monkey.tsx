@@ -84,9 +84,6 @@ class CardMonkey extends Component<PropTypes, CardMonkeyState> {
             <section>
               <h2>{this.props.data.deck}</h2>
               <CardQuery />
-              <button onClick={this.props.clearDeck}>
-                View Decks
-              </button>
             </section>
           </>
         )

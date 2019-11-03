@@ -48,7 +48,8 @@ export function deckReducer(state = initialState, action: DeckData): DeckStore {
       return { ...state, deck_creation: true };
 
     case "CREATEDECK":
-      return { ...state, deck_creation: false };
+      console.log("PAYLOAD", payload);
+      return { ...state, deck: payload.deck, deck_id: payload._id, deck_creation: false };
 
     default:
       return state;

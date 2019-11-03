@@ -27,8 +27,10 @@ class DeckForm extends Component<DeckProps, DeckInterface> {
       method: "POST"
     })
       .then(response => {
-        console.log("RESPONSE", response);
-        this.props.createDeck(response);
+        return response.json();
+      })
+      .then((response) => {
+        this.props.createDeck(response.res)
       })
       // .then(message => this.props.refetchData())
       .catch(error => {
@@ -51,21 +53,23 @@ class DeckForm extends Component<DeckProps, DeckInterface> {
 
   render() {
     return (
-      <form onSubmit={this.handleFormSubmit}>
-        <fieldset>
-          <legend>Add a Deck</legend>
-          <label htmlFor="deck"> Deck Form </label>
-          <input
-            id="deck"
-            placeholder="deck name"
-            name="deck"
-            type="text"
-            value={this.state.deck}
-            onChange={this.handleDeck}
-          />
-          <button type="submit"> Create Deck </button>
-        </fieldset>
-      </form>
+      <section>
+        <form className="deck" onSubmit={this.handleFormSubmit}>
+          <fieldset>
+            <legend>Add a Deck</legend>
+            <label htmlFor="deck"> Deck Form </label>
+            <input
+              id="deck"
+              placeholder="deck name"
+              name="deck"
+              type="text"
+              value={this.state.deck}
+              onChange={this.handleDeck}
+            />
+            <button type="submit"> Create Deck </button>
+          </fieldset>
+        </form>
+      </section>
     );
   }
 }

@@ -47,7 +47,7 @@ function QueryComponent(props: QueryComProps): any {
   const { loading, error, data, refetch } =
     useQuery<DeckData, DeckVars>(MY_DECKS_QUERY, {
       variables: {
-        owner_id: props.data.user_id, first: 4
+        owner_id: props.data.user_id, first: 6
       }
     });
 
