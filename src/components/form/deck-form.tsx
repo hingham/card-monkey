@@ -56,11 +56,10 @@ class DeckForm extends Component<DeckProps, DeckInterface> {
       <section>
         <form className="deck" onSubmit={this.handleFormSubmit}>
           <fieldset>
-            <legend>Add a Deck</legend>
-            <label htmlFor="deck"> Deck Form </label>
+            <legend>Create New Deck</legend>
+            <label htmlFor="deck"> Deck Name: </label>
             <input
               id="deck"
-              placeholder="deck name"
               name="deck"
               type="text"
               value={this.state.deck}

@@ -19,7 +19,7 @@ header {
         }
     }
 
-    
+
     h2{
         font-size: 2em;
         padding: .5em;
@@ -43,15 +43,17 @@ header {
             @include flex(row, center, flex-start);
             box-sizing: border-box;
             padding: 10px;
-        
-            li:not(#search){ 
+
+            li:not(#search){
                 margin-right: 2em;
                 cursor: pointer;
                 width: fit-content;
+                padding: 5px;
             }
 
             li:hover:not(#search){
-                background-color: darken($white, 5%);
+                background-color: lighten($black, 15%);
+                @include box-shadow;
             }
 
             li#search {

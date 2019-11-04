@@ -6,6 +6,7 @@ import CardQuery from "../query/card-query";
 import Welcome from "../welcome/welcome";
 
 import { DeckStore, UserIdInterface } from '../../types/index';
+import Header from "../header/header";
 
 import gql from "graphql-tag";
 import { client } from "../../apollo-client";
@@ -81,6 +82,7 @@ class CardMonkey extends Component<PropTypes, CardMonkeyState> {
       if (this.props.data.deck_id) {
         return (
           <>
+            <Header signed_in={true} />
             <section>
               <h2>{this.props.data.deck}</h2>
               <CardQuery />
@@ -89,20 +91,31 @@ class CardMonkey extends Component<PropTypes, CardMonkeyState> {
         )
       } else if (this.props.data.deck_creation) {
         return (
-          <DeckForm />
+          <>
+            <Header signed_in={true} />
+            <DeckForm />
+          </>
         )
       }
       else {
         return (
-          <section className="deck-actions">
-            <DeckQuery />
-            <UserActions />
-          </section>
+          <>
+            <Header signed_in={true} />
+            <section className="deck-actions">
+              <DeckQuery />
+              <UserActions />
+            </section>
+          </>
         )
       }
     }
     else {
-      return <Welcome />
+      return (
+        <>
+          <Header signed_id={false} />
+          <Welcome />
+        </>
+      )
     }
   }
 }

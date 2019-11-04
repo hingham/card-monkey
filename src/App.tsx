@@ -13,7 +13,6 @@ export default function App(props: any) {
 
   return (
     <>
-      <Header />
       <CardMonkey />
       <Footer />
     </>

@@ -61,7 +61,6 @@ form.card, form.deck {
 section#card-page-actions {
  width: 50%;
     > ul {
-        // width: 100%;
         margin: .5em auto;
         li{
         background-color: $green;
@@ -74,7 +73,6 @@ section#card-page-actions {
         padding: 5px;
         margin: 10px auto;
         width: 100%;
-
             &:hover {
                 background-color: darken($green, 20%);
             }
