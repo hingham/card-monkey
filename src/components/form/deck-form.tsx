@@ -14,7 +14,8 @@ interface DeckProps {
 class DeckForm extends Component<DeckProps, DeckInterface> {
 
   state: DeckInterface = {
-    deck: ""
+    deck: "",
+    tags: []
   };
 
   handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -22,7 +23,7 @@ class DeckForm extends Component<DeckProps, DeckInterface> {
     e.preventDefault();
     fetch("/.netlify/functions/post", {
       body: JSON.stringify(
-        new Deck(this.state.deck, this.props.data.user_id)
+        new Deck(this.state.deck, this.props.data.user_id, this.state.tags)
       ),
       method: "POST"
     })
@@ -51,6 +52,12 @@ class DeckForm extends Component<DeckProps, DeckInterface> {
     this.setState({ deck: e.currentTarget.value });
   };
 
+  handleTags = (e: React.FormEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const tagArr = e.currentTarget.value.split(",");
+    this.setState({ tags: tagArr });
+  };
+
   render() {
     return (
       <section>
@@ -64,6 +71,14 @@ class DeckForm extends Component<DeckProps, DeckInterface> {
               type="text"
               value={this.state.deck}
               onChange={this.handleDeck}
+            />
+            <label htmlFor="deck_tags"> Tags: </label>
+            <input
+              id="deck"
+              name="deck"
+              type="text"
+              placeholder={"aws, serverless, cloud technologies"}
+              onChange={this.handleTags}
             />
             <button type="submit"> Create Deck </button>
           </fieldset>

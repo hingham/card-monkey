@@ -17,7 +17,8 @@ class CardForm extends Component<CardFormProps, CardFormInterface>{
   state: CardFormInterface = {
     concept: "",
     definition: "",
-    toggleForm: false
+    toggleForm: false,
+    tags: []
   };
 
   toggleForm = () => {
@@ -27,10 +28,10 @@ class CardForm extends Component<CardFormProps, CardFormInterface>{
   handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const { concept, definition } = this.state;
+    const { concept, definition, tags } = this.state;
     const { deck, deck_id } = this.props.data;
 
-    const newCard = new Card(concept, definition, deck, deck_id);
+    const newCard = new Card(concept, definition, deck, deck_id, tags);
 
     fetch("/.netlify/functions/post", {
       body: JSON.stringify(newCard),
@@ -62,6 +63,12 @@ class CardForm extends Component<CardFormProps, CardFormInterface>{
     this.setState({ definition: e.currentTarget.value });
   };
 
+  handleTags = (e: React.FormEvent<HTMLTextAreaElement>) => {
+    e.preventDefault();
+    const tagsArr = e.currentTarget.value.split(",");
+    this.setState({ tags: tagsArr });
+  };
+
   render() {
 
     if (this.state.toggleForm === true) {
@@ -84,6 +91,15 @@ class CardForm extends Component<CardFormProps, CardFormInterface>{
               name="definition"
               value={this.state.definition}
               onChange={this.handleDefinition}
+            />
+            <label htmlFor="tags">  Tags:  </label>
+            <textarea
+              rows={40}
+              cols={20}
+              name="tags"
+              value={this.state.tags}
+              placeholder={"cloud technologies, aws, serverless"}
+              onChange={this.handleTags}
             />
             <button type="submit">Create Card </button>
           </fieldset>

@@ -28,11 +28,13 @@ export interface CardInputInterface {
     concept: string;
     definition: string,
     deck_id?: string,
-    model?: string
+    model?: string,
+    tags: string[]
 }
 
 export interface DeckInterface {
     deck: string;
+    tags: string[];
     _id?: string;
     owner_id?: string;
 }
@@ -50,18 +52,21 @@ export class Card implements CardInputInterface {
     model: string;
     deck: string;
     deck_id: string;
+    tags: string[];
 
     constructor(
         concept: string,
         definition: string,
         deck: string,
-        deck_id: string
+        deck_id: string,
+        tags: string[]
     ) {
         this.concept = concept;
         this.definition = definition;
         this.model = "cards";
         this.deck = deck;
         this.deck_id = deck_id;
+        this.tags = tags
     }
 }
 
@@ -69,12 +74,16 @@ export class Deck implements DeckInterface {
     deck: string;
     model: string;
     owner_id: string;
+    tags: string[];
+
     constructor(
         deck: string,
-        owner_id: string
+        owner_id: string,
+        tags: string[]
     ) {
         this.deck = deck;
         this.owner_id = owner_id;
         this.model = "deck";
+        this.tags = tags;
     }
 }

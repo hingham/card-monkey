@@ -11,9 +11,9 @@ connectToDatabase();
 const typeDefs = gql`
   type Query {
     user(git_id: Int!): User
-    decks: [Deck]
+    decks (tag: String): [Deck]
     myDecks(owner_id: String!, first: Int): [Deck]
-    cards(deck_id: String!): [Card]
+    cards(deck_id: String, tag: String): [Card]
   }
 
   type User {
@@ -33,6 +33,7 @@ const typeDefs = gql`
       _id: String!
       concept: String
       definition: String
+      tags: String[]
   }
 `;
 
