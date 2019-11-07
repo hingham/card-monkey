@@ -26,6 +26,7 @@ const DECK_CARDS_QUERY = gql`
       definition
       deck_id
       _id
+      tags
     }
   }
 `;
@@ -52,7 +53,7 @@ function QueryComponent(props: PropTypes): any {
     <div className="cards">
       <ul>
         {data && data.cards.map((card: CardInterface, i: number) => (
-          <Card key={`${i}-card`} concept={card.concept} definition={card.definition} _id={card._id} refetchData={refetchData} />
+          <Card key={`${i}-card`} concept={card.concept} definition={card.definition} _id={card._id} tags={card.tags} refetchData={refetchData} />
         ))}
       </ul>
       {/* <button onClick={() => refetchData()}>refetch</button> */}

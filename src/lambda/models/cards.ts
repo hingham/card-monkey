@@ -5,7 +5,8 @@ const cardSchema = new mongoose.Schema({
   concept: { type: String, required: true },
   definition: { type: String, required: true },
   deck_id: { type: String, required: true },
-  card_id: { type: String }
+  card_id: { type: String },
+  tags: { type: [String] }
 });
 
 export default mongoose.model("cards", cardSchema);

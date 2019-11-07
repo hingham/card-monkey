@@ -101582,6 +101582,9 @@ const cardSchema = new mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.Schema({
   },
   card_id: {
     type: String
+  },
+  tags: {
+    type: [String]
   }
 });
 /* harmony default export */ __webpack_exports__["default"] = (mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.model("cards", cardSchema));

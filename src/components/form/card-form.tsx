@@ -65,7 +65,7 @@ class CardForm extends Component<CardFormProps, CardFormInterface>{
 
   handleTags = (e: React.FormEvent<HTMLTextAreaElement>) => {
     e.preventDefault();
-    const tagsArr = e.currentTarget.value.split(",");
+    const tagsArr = e.currentTarget.value.replace(" ", "").split(",");
     this.setState({ tags: tagsArr });
   };
 

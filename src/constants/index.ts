@@ -17,4 +17,7 @@ export type NEWDECK = typeof NEWDECK;
 export const CREATEDECK = 'CREATEDECK';
 export type CREATEDECK = typeof CREATEDECK;
 
+export const SEARCHDECK = 'SEARCHDECK';
+export type SEARCHDECK = typeof SEARCHDECK;
+
 

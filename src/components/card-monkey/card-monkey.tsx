@@ -4,6 +4,7 @@ import DeckQuery from "../query/deck-query";
 import UserActions from "../user-actions/user-actions";
 import CardQuery from "../query/card-query";
 import Welcome from "../welcome/welcome";
+import DeckSearch from "../deck-search/deck-search-form";
 
 import { DeckStore, UserIdInterface } from '../../types/index';
 import Header from "../header/header";
@@ -84,7 +85,7 @@ class CardMonkey extends Component<PropTypes, CardMonkeyState> {
           <>
             <Header signed_in={true} />
             <section>
-              <h2>{this.props.data.deck}</h2>
+              <h2>{this.props.data.deck}: {this.props.data.deck_tags.join(", ")}</h2>
               <CardQuery />
             </section>
           </>
@@ -94,6 +95,13 @@ class CardMonkey extends Component<PropTypes, CardMonkeyState> {
           <>
             <Header signed_in={true} />
             <DeckForm />
+          </>
+        )
+      } else if (this.props.data.deck_search) {
+        return (
+          <>
+            <Header signed_in={true} />
+            <DeckSearch />
           </>
         )
       }

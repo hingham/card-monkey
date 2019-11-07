@@ -101526,6 +101526,9 @@ const cardSchema = new mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.Schema({
   },
   card_id: {
     type: String
+  },
+  tags: {
+    type: [String]
   }
 });
 /* harmony default export */ __webpack_exports__["default"] = (mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.model("cards", cardSchema));
@@ -101546,7 +101549,10 @@ __webpack_require__.r(__webpack_exports__);
 
 const decksSchema = new mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.Schema({
   deck: String,
-  owner_id: String
+  owner_id: String,
+  tags: {
+    type: [String]
+  }
 }); // module.exports = mongoose.model('Note', NoteSchema);
 
 /* harmony default export */ __webpack_exports__["default"] = (mongoose__WEBPACK_IMPORTED_MODULE_0___default.a.model("decks", decksSchema));

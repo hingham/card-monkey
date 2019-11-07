@@ -4,10 +4,7 @@ import React from "react";
 import { DeckStore, DeckInterface } from '../../types/index'
 import { useQuery } from '@apollo/react-hooks';
 
-import DeckForm from '../form/deck-form';
-import DeckThumbSVG from '../../meta/components/deck-thumb-icon';
 import DeckSVG from '../../meta/components/deck-icon';
-import CardSVG from '../../meta/components/card-icon';
 
 import gql from "graphql-tag";
 import { connect } from 'react-redux';
@@ -27,6 +24,7 @@ query ($owner_id: String!, $first: Int){
     myDecks(owner_id: $owner_id, first: $first){
       deck
       _id
+      tags
     }
   }
 `;

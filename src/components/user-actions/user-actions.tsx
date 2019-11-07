@@ -3,7 +3,6 @@ import DeckThumbSVG from '../../meta/components/deck-thumb-icon';
 import DeckSVG from '../../meta/components/deck-icon';
 import CardSVG from '../../meta/components/card-icon';
 import { DeckStore, DeckInterface } from '../../types/index'
-import DeckForm from '../form/deck-form';
 
 import { connect } from 'react-redux';
 import * as actions from "../../store/actions"
@@ -11,6 +10,7 @@ import * as actions from "../../store/actions"
 type UserActionProps = {
     data: DeckStore;
     newDeck: Function;
+    searchDeck: Function;
 }
 
 function UserActions(props: UserActionProps): any {
@@ -30,8 +30,8 @@ function UserActions(props: UserActionProps): any {
                     <h4>Your Decks</h4>
                     < DeckSVG width="40%" />
                 </li>
-                <li>
-                    <h4>Trending Decks</h4>
+                <li onClick={() => props.searchDeck()}>
+                    <h4>Search Decks</h4>
                     < DeckSVG width="40%" />
                 </li>
             </ul>
@@ -44,7 +44,8 @@ const mapStateToProps = (state: UserActionProps) => ({
 });
 
 const mapDispatchToProps = (dispatch: any, getState: any) => ({
-    newDeck: (payload: any) => dispatch(actions.newDeck())
+    newDeck: (payload: any) => dispatch(actions.newDeck()),
+    searchDeck: () => dispatch(actions.searchDeck())
 });
 
 export default connect(

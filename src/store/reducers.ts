@@ -10,7 +10,10 @@ const initialState: DeckStore = {
   deck_id: "",
   user_git_id: NaN,
   user_id: '',
-  deck_creation: false
+  deck_creation: false,
+  deck_tags: [],
+  deck_search: false,
+  deck_search_value: ""
 }
 
 export function deckReducer(state = initialState, action: DeckData): DeckStore {
@@ -18,7 +21,7 @@ export function deckReducer(state = initialState, action: DeckData): DeckStore {
 
   switch (type) {
     case "DECK":
-      let newState = { ...state, deck: payload.deck, deck_id: payload._id };
+      let newState = { ...state, deck: payload.deck, deck_id: payload._id, deck_tags: payload.tags };
 
       console.log('new state', newState);
       return newState;
@@ -29,7 +32,9 @@ export function deckReducer(state = initialState, action: DeckData): DeckStore {
         ...state,
         deck: "",
         deck_id: "",
-        user_git_id: NaN
+        user_git_id: NaN,
+        deck_search: false,
+        deck_search_value: ""
       }
 
 
@@ -49,7 +54,11 @@ export function deckReducer(state = initialState, action: DeckData): DeckStore {
 
     case "CREATEDECK":
       console.log("PAYLOAD", payload);
-      return { ...state, deck: payload.deck, deck_id: payload._id, deck_creation: false };
+      return { ...state, deck: payload.deck, deck_id: payload._id, deck_tags: payload.tags, deck_creation: false };
+
+    case "SEARCHDECK":
+      console.log("PAYLOAD", payload);
+      return { ...state, deck_search_value: payload ? payload : "", deck_search: true };
 
     default:
       return state;

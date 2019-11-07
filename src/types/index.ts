@@ -1,11 +1,14 @@
 import { string } from "prop-types";
 
 export type DeckStore = {
-    deck: string,
-    deck_id: string,
-    user_git_id: number,
-    user_id: string,
+    deck: string;
+    deck_id: string;
+    user_git_id: number;
+    user_id: string;
     deck_creation: boolean;
+    deck_tags: string[];
+    deck_search: boolean;
+    deck_search_value: string;
 }
 
 // export type Deck = {
@@ -21,6 +24,7 @@ export interface CardInterface {
     deck_id?: string,
     model?: string
     _id: string;
+    tags: string[];
 }
 
 export interface CardInputInterface {
@@ -37,6 +41,7 @@ export interface DeckInterface {
     tags: string[];
     _id?: string;
     owner_id?: string;
+    cards?: []
 }
 
 export interface UserIdInterface {

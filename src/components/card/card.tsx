@@ -6,6 +6,7 @@ type CardProps = {
   definition: string;
   refetchData: Function;
   _id: string;
+  tags: string[];
 }
 
 type CardId = {
@@ -36,6 +37,7 @@ class Card extends Component<CardProps, any> {
         <div>
           <h4> {this.props.concept} </h4>
           <p> {this.props.definition} </p>
+          <p>{this.props.tags.join(",")}</p>
           <div id="edit" onClick={() => console.log('user wants to edit card')}>
             <img
               src="https://image.flaticon.com/icons/svg/61/61456.svg"

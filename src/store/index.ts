@@ -3,7 +3,6 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunkMiddleware from "redux-thunk";
 
 import { deckReducer } from "./reducers";
-import { configure } from "protobufjs";
 
 let rootReducer = combineReducers({
   data: deckReducer

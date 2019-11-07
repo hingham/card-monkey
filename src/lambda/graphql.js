@@ -11,9 +11,10 @@ connectToDatabase();
 const typeDefs = gql`
   type Query {
     user(git_id: Int!): User
-    decks (tag: String): [Deck]
+    decks(tag: String): [Deck]
     myDecks(owner_id: String!, first: Int): [Deck]
     cards(deck_id: String, tag: String): [Card]
+    fullDecksByTag(tag: String): [Deck]
   }
 
   type User {
@@ -25,22 +26,26 @@ const typeDefs = gql`
   type Deck {
     deck: String!
     _id: String!
-    cards: [Card]
+    cards(deck_id: String): [Card]
+    tags: [String]
   }
 
   type Card {
-      deck_id: String!
-      _id: String!
-      concept: String
-      definition: String
-      tags: String[]
+    deck_id: String!
+    _id: String!
+    concept: String
+    definition: String
+    tags: [String]
   }
 `;
 
 const resolvers = {
   Query: {
 
-    decks: () => {
+    decks: (parent, args) => {
+      if (args.tag) {
+        return decks.find({ tags: args.tag });
+      }
       return decks.find({});
     },
     myDecks: (parent, args) => {
@@ -54,11 +59,16 @@ const resolvers = {
     },
     user: (parent, args) => {
       return users.findOne({ git_id: args.git_id })
+    },
+    fullDecksByTag: (parent, args) => {
+      // console.log(decks.find({ tags: args.tag }));
+      return decks.find({ tags: args.tag })
     }
   },
   Deck: {
     cards: (parent, args) => {
-      console.log('parent', parent);
+      console.log('parent', parent, parent._id);
+      // console.log(cards.find({ deck_id: parent._id }));
       return cards.find({ deck_id: parent._id })
     }
   }

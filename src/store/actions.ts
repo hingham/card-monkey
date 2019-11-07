@@ -29,6 +29,11 @@ export interface CreateDeck {
   payload: any;
 }
 
+export interface SearchDeck {
+  type: constants.SEARCHDECK;
+  payload: any;
+}
+
 
 export const changeDeck = (payload: any): ChangeDeck => {
   return {
@@ -66,6 +71,13 @@ export const newDeck = (): NewDeck => {
 export const createDeck = (payload: any): CreateDeck => {
   return {
     type: "CREATEDECK",
+    payload: payload
+  }
+}
+
+export const searchDeck = (payload?: string | ""): SearchDeck => {
+  return {
+    type: "SEARCHDECK",
     payload: payload
   }
 }
