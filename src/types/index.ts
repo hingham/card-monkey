@@ -44,6 +44,10 @@ export interface DeckInterface {
     cards?: []
 }
 
+export interface DeckCardInterface extends DeckInterface {
+    cards: [];
+}
+
 export interface UserIdInterface {
     _id: string;
     git_id: number;

@@ -67,11 +67,12 @@ function QueryComponent(props: QueryComProps): any {
 
       <div id="decks">
         <section>
-          <h2>Recent Decks
-          <span style={{ margin: "0em 0em -10px 20px" }}>
-              < DeckSVG width="15%" />
+          <div>
+            <h2>Recent Decks</h2>
+            <span style={{ margin: "0em 0em -10px 20px", width: "25%" }}>
+              < DeckSVG width="50%" />
             </span>
-          </h2>
+          </div>
           <ul>
             {data && data.myDecks && data.myDecks.map((deck, i) => (
               <li key={`deck${i}`} onClick={() => props.changeDeck(deck)}>

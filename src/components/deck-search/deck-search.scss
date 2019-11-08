@@ -1,0 +1,31 @@
+div.deck-search {
+  width: 60%;
+  margin: 1em;
+
+  > ul {
+    > li {
+      margin: 1em 0em;
+      box-sizing: border-box;
+
+      h3 {
+        color: $black;
+        background-color: lighten($black, 60%);
+        padding: .5em 1em;
+        border-bottom: 1px solid $black;
+      }
+    }
+    ul {
+      @include box-shadow;
+      li {
+        border-bottom: .5px solid $black;
+        color: $black;
+        background-color: lighten($black, 70%);
+        padding: .5em 1.7em;
+        font-size: .8em;
+        h4 {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

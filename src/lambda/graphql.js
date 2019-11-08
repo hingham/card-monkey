@@ -11,7 +11,7 @@ connectToDatabase();
 const typeDefs = gql`
   type Query {
     user(git_id: Int!): User
-    decks(tag: String): [Deck]
+    decks(tag: String, owner_id: String, first: Int): [Deck]
     myDecks(owner_id: String!, first: Int): [Deck]
     cards(deck_id: String, tag: String): [Card]
     fullDecksByTag(tag: String): [Deck]

@@ -4,7 +4,7 @@ import DeckQuery from "../query/deck-query";
 import UserActions from "../user-actions/user-actions";
 import CardQuery from "../query/card-query";
 import Welcome from "../welcome/welcome";
-import DeckSearch from "../deck-search/deck-search-form";
+import DeckSearch from "../deck-search/deck-search";
 
 import { DeckStore, UserIdInterface } from '../../types/index';
 import Header from "../header/header";

@@ -1,4 +1,5 @@
 section#user-actions {
+    margin-top: 2em;
     ul{
         @include flex(row, center, center);
         width: 100%;
@@ -10,12 +11,12 @@ section#user-actions {
             box-sizing: border-box;
             border: 5px solid $yellow;
             background-color: $white;
-            width: 225px;
-            font-size: 1.2em;
+            width: 10em;
+            font-size: 1em;
             text-align: center;
             cursor: pointer;
             margin: 15px 20px 0 0;
-            padding: 1.5em;
+            padding: 1em;
             @include box-shadow;
 
         &:hover {

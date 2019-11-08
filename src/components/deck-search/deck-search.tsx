@@ -17,19 +17,21 @@ type SearchProps = {
 
 function SearchDeck(props: any): any {
     console.log("search", props);
-    if (props.data.deck_search && props.data.deck_search_value) {
+    if (props.data.deck_search && props.data.deck_search_value !== "") {
         console.log("search and value", props.data);
         return (
             <>
-                <DeckSearchForm />
-                <DeckSearchResults tag={props.data.deck_search_value} />
+                <section>
+                    <DeckSearchForm />
+                    <DeckSearchResults tag={props.data.deck_search_value} />
+                </section>
             </>
         )
     } else if (props.data.deck_search) {
-        console.log("search", props.data);
-
         return (
-            <DeckSearchForm />
+            <section>
+                <DeckSearchForm />
+            </section>
         )
     }
 }
@@ -38,12 +40,12 @@ const mapStateToProps = (state: any) => ({
     data: state.data
 });
 
-const mapDispatchToProps = (dispatch: any, getState: any) => ({
-    newDeck: (payload: any) => dispatch(actions.newDeck()),
-    searchDeck: () => dispatch(actions.searchDeck())
-});
+// const mapDispatchToProps = (dispatch: any, getState: any) => ({
+//     newDeck: (payload: any) => dispatch(actions.newDeck()),
+//     searchDeck: () => dispatch(actions.searchDeck())
+// });
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    null
 )(SearchDeck);

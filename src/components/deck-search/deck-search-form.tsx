@@ -40,22 +40,19 @@ class DeckSearchForm extends Component<DeckSearchProps, DeckSearchStateInterface
 
     render() {
         return (
-            <section>
-                <form className="deck_search" onSubmit={this.handleFormSubmit}>
-                    <fieldset>
-                        <legend>Seach Decks</legend>
-                        <label htmlFor="deck_search"> Deck Name: </label>
-                        <input
-                            id="deck_search"
-                            name="deck_search"
-                            type="text"
-                            value={this.state.deck_concept}
-                            onChange={this.handleSearch}
-                        />
-                        <button type="submit"> Search </button>
-                    </fieldset>
-                </form>
-            </section>
+            <form className="deck_search" onSubmit={this.handleFormSubmit}>
+                <fieldset>
+                    <legend>Seach Decks by Topic: </legend>
+                    <input
+                        id="deck_search"
+                        name="deck_search"
+                        type="text"
+                        value={this.state.deck_concept}
+                        onChange={this.handleSearch}
+                    />
+                    <button type="submit"> Search </button>
+                </fieldset>
+            </form>
         );
     }
 }

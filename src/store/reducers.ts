@@ -34,7 +34,8 @@ export function deckReducer(state = initialState, action: DeckData): DeckStore {
         deck_id: "",
         user_git_id: NaN,
         deck_search: false,
-        deck_search_value: ""
+        deck_search_value: "",
+        deck_creation: false
       }
 
 
@@ -58,7 +59,9 @@ export function deckReducer(state = initialState, action: DeckData): DeckStore {
 
     case "SEARCHDECK":
       console.log("PAYLOAD", payload);
-      return { ...state, deck_search_value: payload ? payload : "", deck_search: true };
+      const searchState = { ...state, deck_search_value: payload ? payload : "", deck_search: true };
+      console.log("state after search deck tag submitted...", searchState);
+      return searchState;
 
     default:
       return state;
