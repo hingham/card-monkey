@@ -70,7 +70,7 @@ function QueryComponent(props: QueryComProps): any {
           <div>
             <h2>Recent Decks</h2>
             <span style={{ margin: "0em 0em -10px 20px", width: "25%" }}>
-              < DeckSVG width="50%" />
+              < DeckSVG width="70%" />
             </span>
           </div>
           <ul>

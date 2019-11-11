@@ -3,7 +3,6 @@ header {
     background-color: lighten($yellow, 20%);
     @include flex(column, center, center);
     box-sizing: border-box;
-    padding: 2em 0 0em 0;
 
     > * {
         color: $black;
