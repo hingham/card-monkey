@@ -25,7 +25,7 @@
     "graphql": "^14.3.1",
     "graphql-tag": "^2.10.1",
     "http-proxy-middleware": "^0.19.1",
-    "mongoose": "^5.5.11",
+    "mongoose": "^5.7.5",
     "mongoose-schema-jsonschema": "^1.2.1",
     "netlify-lambda": "^1.4.13",
     "node-sass": "^4.12.0",
